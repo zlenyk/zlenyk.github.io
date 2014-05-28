@@ -1,0 +1,25 @@
+function createTable(var number){
+	/*var div = document.getElementById("mainDiv");
+	var table = document.createElement("table");
+				table.setAttribute("border","1");
+				for(var i = 0; i<number; i++){
+					var row = document.createElement("tr");
+					for(int j = 0; j<number; j++){
+						var col = document.createElement("td");
+						col.appendChild("S");
+						row.appendChild(col);
+					}
+					table.appendChild(row);
+				}
+				div.appendChild(table);*/
+			}
+function load(){
+	alert("DW");
+//	createTable(3);
+	/*var dots = document.getElementsByClassName('dot');
+	for(var i = 0; i<dots.length; i++){
+		dots[i].addEventListener('click',function(e){
+		alert("Dot nr " + i.toString());
+		});
+	}*/
+}

@@ -1,10 +1,39 @@
+<!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Moja strona</title>
-		<link rel="shortcut icon" href="images/icon.ico" />
-</head>
-
+		<link rel='stylesheet' type='text/css' href='css/dots2.css' />
+		<script src = 'js/dots2.js'></script>
+		<script>
+			var clicked = 0;
+			var dotArray = new Array(25);
+			for(var i = 0; i<25; i++){
+				dotArray[i] = new Array(25);
+				for(var j = 0; j<25; j++){
+					dotArray[i][j] = false;
+				}
+			}
+			var vLines = new Array(25);
+			for(var i = 0; i<25; i++){
+				vLines[i] = new Array(25);
+				for(var j = 0; j<25; j++){
+					vLines[i][j] = false;
+				}
+			}
+			var hLines = new Array(25);
+			for(var i = 0; i<25; i++){
+				hLines[i] = new Array(25);
+				for(var j = 0; j<25; j++){
+					hLines[i][j] = false;
+				}
+			}
+		</script>
+	</head>
 	<body>
-		
+		<canvas id='dotCanvas' width='500' height='500' style='border:1px solid #000000;float:left;' ></canvas>
+	
+			
+			<form action='javascript:newGame()'>
+				<input id='newGame' type='submit' value='New Game'/>
+			</form>
 	</body>
 </html>
