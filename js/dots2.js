@@ -39,7 +39,7 @@ function canvasClicked(e){
 }
 function countTime(){
 	if(clicked == size*size || endGame) return;
-	ms++;
+	ms += 2;
 	if(ms == 1000){
 		s++;
 		ms = 0;
