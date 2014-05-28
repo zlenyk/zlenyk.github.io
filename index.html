@@ -4,36 +4,29 @@
 		<link rel='stylesheet' type='text/css' href='css/dots2.css' />
 		<script src = 'js/dots2.js'></script>
 		<script>
+			var clickWidth = 5;
+			var smallDot = 2;
+			var bigDot = 4;
+			var size = 6;
 			var clicked = 0;
-			var dotArray = new Array(25);
-			for(var i = 0; i<25; i++){
-				dotArray[i] = new Array(25);
-				for(var j = 0; j<25; j++){
+			var s = 0;
+			var ms = 0;
+			var dotArray = new Array(size);
+			for(var i = 0; i<size; i++){
+				dotArray[i] = new Array(size);
+				for(var j = 0; j<size; j++){
 					dotArray[i][j] = false;
-				}
-			}
-			var vLines = new Array(25);
-			for(var i = 0; i<25; i++){
-				vLines[i] = new Array(25);
-				for(var j = 0; j<25; j++){
-					vLines[i][j] = false;
-				}
-			}
-			var hLines = new Array(25);
-			for(var i = 0; i<25; i++){
-				hLines[i] = new Array(25);
-				for(var j = 0; j<25; j++){
-					hLines[i][j] = false;
 				}
 			}
 		</script>
 	</head>
 	<body>
-		<canvas id='dotCanvas' width='500' height='500' style='border:1px solid #000000;float:left;' ></canvas>
-	
+		<canvas id='dotCanvas' width='200' height='200' style='border:1px solid #000000;float:left;' ></canvas>
+
 			
 			<form action='javascript:newGame()'>
 				<input id='newGame' type='submit' value='New Game'/>
 			</form>
+			<div id='timer'></div>
 	</body>
 </html>

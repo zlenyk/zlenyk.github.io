@@ -1,52 +1,73 @@
-//window.addEventListener('load', onLoadFun());
 window.onload = function(){
 	var d_canvas = document.getElementById('dotCanvas');
 	drawBoard();
 	d_canvas.addEventListener('click',canvasClicked,false);
 }
 function newGame(){
-	for(var i = 0; i<25; i++){
-		for(var j = 0; j<25; j++){
+	for(var i = 0; i<size; i++){
+		for(var j = 0; j<size; j++){
 			dotArray[i][j] = false;
 		}
 	}
 	drawBoard();
+	s = 0;
+	ms = 0;
+	refreshClock();
 }
 function canvasClicked(e){
 	var d_canvas = document.getElementById('dotCanvas');
 	var x = e.pageX - d_canvas.offsetLeft;
 	var y = e.pageY - d_canvas.offsetTop;
-	var clickWidth = 3;
+	var c = d_canvas.width/size;
+	
 	var i = 0;
-	while( (((20*i)+10-x)>clickWidth || ((20*i)+10-x)<(-1*(clickWidth))) && i < 25){
+	while( (((c*i)+c/2-x)>clickWidth || ((c*i)+c/2-x)<(-1*(clickWidth))) && i <size){
 		i++;
 	}
 	var j = 0;
-	while( (((20*j)+10-y)>clickWidth || ((20*j)+10-y)<(-1*(clickWidth))) && j < 25){
+	while( (((c*j)+c/2-y)>clickWidth || ((c*j)+c/2-y)<(-1*(clickWidth))) && j<size){
 		j++;
 	}
-	if(i >= 25 || j >= 25) return;
+	if(i >= size || j >= size) return;
 	
 	dotArray[i][j] = true;
 	clicked++;
 	drawBoard();
 	return;
 }
+function countTime(){
+	if(clicked == size*size) return;
+	ms++;
+	if(ms == 1000){
+		s++;
+		ms = 0;
+	}
+	refreshClock();
+	setTimeout('countTime()',1);
+}
+function refreshClock(){
+	var text = s.toString() + "." + ms.toString();
+	document.getElementById('timer').innerHTML = text;
+}
 
 function drawBoard(){
 	var d_canvas = document.getElementById('dotCanvas');
 	var context = d_canvas.getContext('2d');
 	context.clearRect(10,10,d_canvas.width,d_canvas.height);
-	for(var i = 0; i<25; i++){
-		for(var j = 0; j<25;j++){
+	var c = d_canvas.width/size;
+	clicked = 0;
+	for(var i = 0; i<size; i++){
+		for(var j = 0; j<size;j++){
 			if(dotArray[i][j] == false){
-				drawCircle(i*20+10,j*20+10,1,context);
+				drawCircle(i*c+c/2,j*c+c/2,smallDot,context);
 			}
 			else{
-				drawCircle(i*20+10,j*20+10,3,context);
+				clicked++;
+				drawCircle(i*c+c/2,j*c+c/2,bigDot,context);
 			}
 		}
 	}
+	if(clicked == 1) countTime();
 }
 function drawCircle(x,y,radius,context){
 	context.beginPath();
