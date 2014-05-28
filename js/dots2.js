@@ -4,6 +4,7 @@ window.onload = function(){
 	d_canvas.addEventListener('click',canvasClicked,false);
 }
 function newGame(){
+	endGame = true;
 	for(var i = 0; i<size; i++){
 		for(var j = 0; j<size; j++){
 			dotArray[i][j] = false;
@@ -15,6 +16,7 @@ function newGame(){
 	refreshClock();
 }
 function canvasClicked(e){
+	endGame = false;
 	var d_canvas = document.getElementById('dotCanvas');
 	var x = e.pageX - d_canvas.offsetLeft;
 	var y = e.pageY - d_canvas.offsetTop;
@@ -36,7 +38,7 @@ function canvasClicked(e){
 	return;
 }
 function countTime(){
-	if(clicked == size*size) return;
+	if(clicked == size*size || endGame) return;
 	ms++;
 	if(ms == 1000){
 		s++;
