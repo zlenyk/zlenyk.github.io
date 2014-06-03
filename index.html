@@ -1,33 +1,26 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<link rel='stylesheet' type='text/css' href='css/dots2.css' />
-		<script src = 'js/dots2.js'></script>
+		<link rel='stylesheet' type='text/css' href='css/index.css' />
+		<script src = 'scripts/test.js'></script>
+		<script src = 'scripts/timer.js'></script>
+		<script src = 'scripts/board.js'></script>
+		<script src = 'scripts/node_modules/kinetic/kinetic.js'></script>
 		<script>
-			var endGame = false;
-			var clickWidth = 8;
-			var smallDot = 6;
-			var bigDot = 9;
 			var size = 4;
-			var clicked = 0;
-			var s = 0;
-			var ms = 0;
-			var dotArray = new Array(size);
-			for(var i = 0; i<size; i++){
-				dotArray[i] = new Array(size);
-				for(var j = 0; j<size; j++){
-					dotArray[i][j] = false;
-				}
-			}
+			var gameWidth = 200;
+			var gameHeight = 200;
+			var timer;
+			var board;
 		</script>
 	</head>
 	<body>
-		<canvas id='dotCanvas' width='200' height='200' style='border:1px solid #000000;float:left;' ></canvas>
+		<div id='game'></div>
+		<div id='timer'></div>
 
-			
-			<form action='javascript:newGame()'>
-				<input id='newGame' type='submit' value='New Game'/>
-			</form>
-			<div id='timer'></div>
+		<form action='javascript:startNewGame()'>
+			<input id='newGame' type='submit' value='New Game'/>
+		</form>
+	
 	</body>
 </html>
