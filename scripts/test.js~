@@ -1,8 +1,0 @@
-window.onload = function(){
-	alert('e');
-	drawBoard();
-}
-
-function drawBoard(){
-	
-}
