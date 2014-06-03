@@ -23,7 +23,7 @@ var Board = function(){
 		var c = gameWidth/size;
 		for(var i = 0; i < size; i++){
 			for(var j = 0; j<size; j++){
-				layer.add(this.drawCircle(layer,i*c+c/2 , j*c+c/2 ,5));
+				layer.add(this.drawCircle(layer,i*c+c/2 , j*c+c/2 ,smallDotSize));
 			}
 		}	
 		this.stage.add(layer);
@@ -38,7 +38,7 @@ var Board = function(){
 			y: _y
 		});
 		circle.on('click',function(){
-			circle.radius(r+2);
+			circle.radius(bigDotSize);
 			layer.draw();
 			me.circleClicked();
 		});
@@ -46,7 +46,7 @@ var Board = function(){
 	}
 	this.circleClicked = function(){	
 		this.clicked++;
-		click();
+		click();						//function in game that controls timer
 	}
 	this.getClickedCount = function(){
 		return this.clicked;
