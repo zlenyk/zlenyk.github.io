@@ -38,14 +38,16 @@ var Board = function(){
 			y: _y
 		});
 		circle.on('click',function(){
+			me.circleClicked(circle);
 			circle.radius(bigDotSize);
 			layer.draw();
-			me.circleClicked();
 		});
 		return circle;
 	}
-	this.circleClicked = function(){	
-		this.clicked++;
+	this.circleClicked = function(circle){	
+		if(circle.radius() != bigDotSize){
+			this.clicked++;
+		}
 		click();						//function in game that controls timer
 	}
 	this.getClickedCount = function(){
