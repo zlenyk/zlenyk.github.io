@@ -1,0 +1,10 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<link rel='stylesheet' type='text/css' href='css/dots2.css' />
+		<script src = 'scripts/test.js'></script>
+		<script src = 'scripts/node_modules/kinetic/kinetic.js'></script>
+	</head>
+	<body>
+	</body>
+</html>
