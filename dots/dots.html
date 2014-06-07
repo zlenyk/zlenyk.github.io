@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<link rel='stylesheet' type='text/css' href='css/dots.css' />
+		<script src = 'scripts/game.js'></script>
+		<script src = 'scripts/timer.js'></script>
+		<script src = 'scripts/board.js'></script>
+		<script src = 'scripts/results.js'></script>
+		<script src = '../scripts/kinetic/kinetic.js'></script>
+		<script>
+			var smallDotSize = 6;
+			var bigDotSize = 10;
+			var size = 4;
+			var gameWidth = 200;
+			var gameHeight = 200;
+			var timer;
+			var board;
+		</script>
+	</head>
+	<body>
+		<div id='mainPage'>
+			<a href='../index.html'>Main Page</a>
+		</div>
+		<header>
+			<p>
+				Click all dots as fast as you can.
+			</p>
+		</header>
+		<div id='game'></div>
+		<div id='timer'></div>
+
+		<form action='javascript:startNewGame()'>
+			<input id='newGame' type='submit' value='New Game'/>
+		</form>
+		<div id='results'></div>
+	</body>
+</html>
