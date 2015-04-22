@@ -1,16 +1,8 @@
 window.addEventListener('keydown', doKeyDown, true);
-var canvas;
-var ctx;
-var rect;
-var drawer;
-function prepare(){
-    canvas = document.getElementById("canvas");
-    ctx = canvas.getContext("2d");
-    try{
-    drawer = new Drawer(canvas);
-    rect = new Rect('purple',100,100,30,30);
-    }catch(err){ alert(err); }
-}
+var canvas = document.getElementById("canvas");
+alert('fae');
+var ctx = canvas.getContext("2d");
+var rect = new Rect(ctx,100,100,30,30);
 function doKeyDown(e) {
     if ( e.keyCode == 87 ) {
         rect.move(0,-10);
@@ -24,5 +16,4 @@ function doKeyDown(e) {
     if ( e.keyCode == 68 ) {
         rect.move(10,0);
     }
-    drawer.draw(rect);
 }

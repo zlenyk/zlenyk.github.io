@@ -3,9 +3,15 @@
 <head>
 <meta charset="UTF-8" />
 <title>Canvas Test</title>
+<script src = 'scripts/game.js'></script>
+<script src = 'scripts/drawer.js'></script>
+<script src = 'scripts/rect.js'></script>
+<script>
+window.onload = prepare;
+window.addEventListener('keydown',doKeyDown,true);
+</script>
 </head>
-<body>
-<section>
+<body onload="prepare()">
 
 <div>
 <canvas id="canvas" width="300" height="200">
@@ -13,41 +19,5 @@ This text is displayed if your browser does not support HTML5 Canvas.
 </canvas>
 </div>
 
-<script type="text/javascript">
-	var canvas = document.getElementById("canvas");
-	window.addEventListener( "keydown", doKeyDown, true);
-	var x = 100;
-	var y = 100;
-	var ctx = canvas.getContext('2d');
-	ctx.fillStyle("purple");
-	function doKeyDown(e) {
-		if ( e.keyCode == 87 ) {
-			clearCanvas();
-			y = y-10;
-			if(y<0) y = canvas.height;
-		}
-
-		if ( e.keyCode == 83 ) {
-			clearCanvas();
-			y = (y+10)%canvas.height;
-		}
-
-		if ( e.keyCode == 65 ) {
-			clearCanvas();
-			x = x-10;
-			if(x < 0) x = canvas.width;
-		}
-
-		if ( e.keyCode == 68 ) {
-			clearCanvas();
-			x = (x+10)%canvas.width;
-		}
-		ctx.fillRect(x,y,30,30);
-	}
-	function clearCanvas() {
-		canvas.width = canvas.width;
-	}
-</script>
-</section>
 </body>
 </html>
