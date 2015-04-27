@@ -13,43 +13,30 @@ html{
     text-align: center;
     color: white;
     font-size: 200%;
-   font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif;
+    font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif;
+}
+.menu{
+    position: absolute;
+    top: 80%;
+    color: white;
+    text-align: center;
+    display: table;
+    padding: 0;
+    width: 98%;
+}
+.menu li{
+    display: table-cell;
+}
+.menu li ul{
+    visibility: 'hidden'; 
+    list-style-type: none;
+    position: absolute;
+    top: -550%;
+    margin-left: 120px;
 }
 
-#menu *{
-    padding:0; 
-    margin: 0; 
-    color: white;
-   list-style-type:none;
-}
-#menu { 
-    position: absolute;
-    width: 99%;
-    top: 80%;
-    float: left;
-}
-#menu ul li {
-    float: left; 
-    width: 346px; 
-    font-weight: bold;
-}
-#menu li{ 
-    position:relative; 
-    float:left;
-}
-#menu ul li ul, #menu:hover ul li ul, #menu:hover ul li:hover ul li ul{ 
-    display:none;
-    list-style-type:none; 
-}
-#menu:hover ul, #menu:hover ul li:hover ul, #menu:hover ul li:hover ul li:hover ul { 
-    display:block;
-}
-#menu:hover ul li:hover ul li:hover ul { 
-    position: absolute;
-    font: 10px;
-}
-#menu:hover ul li:hover ul { 
-    position: absolute;
-    font: 10px;
-    bottom:100%;
+.menu li ul li{
+    display: block;
+    float: none;
+    margin-bottom: 50px;
 }
