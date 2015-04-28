@@ -1,5 +1,5 @@
 html{
-    background: url(../images/backPortugal.JPG) no-repeat center center fixed;
+    background: url(./../images/backPortugal.JPG) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -28,7 +28,7 @@ html{
     display: table-cell;
 }
 .menu li ul{
-    visibility: 'hidden'; 
+    visibility: hidden; 
     list-style-type: none;
     position: absolute;
     top: -550%;
@@ -36,6 +36,7 @@ html{
 }
 
 .menu li ul li{
+    visibility: inherit;
     display: block;
     float: none;
     margin-bottom: 50px;

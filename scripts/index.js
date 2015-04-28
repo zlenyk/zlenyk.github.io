@@ -1,11 +1,8 @@
 $(document).ready(function(){
-    $('.menu > li').bind('mouseover',openSubMenu);
-    $('.menu > li').bind('mouseout',closeSubMenu);
-
-    function openSubMenu(){
+    $('.menu > li').mouseover(function(){
         $(this).find('ul').css('visibility','visible');
-    };
-    function closeSubMenu(){
+    });
+    $('.menu > li').mouseout(function(){
         $(this).find('ul').css('visibility','hidden');
-    };
+    });
 });
