@@ -1,9 +1,11 @@
 html{
-    background: url(./../images/backPortugal.JPG) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+}
+html, body{
+    height: 99%;
 }
 
 #nameDiv{
@@ -15,29 +17,30 @@ html{
     font-size: 200%;
     font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif;
 }
-.menu{
-    position: absolute;
-    top: 80%;
-    color: white;
-    text-align: center;
-    display: table;
-    padding: 0;
-    width: 98%;
+.imageDiv {
+    position: relative;
+    float: left;
+    background: none repeat scroll 0% 0% blue;
+    overflow: hidden;
+    width: 33%;
+    height: 50%;
+    background-size: cover;
 }
-.menu li{
-    display: table-cell;
+#pic1{
+    background-image: url("../images/mitre.JPG");
 }
-.menu li ul{
-    visibility: hidden; 
-    list-style-type: none;
-    position: absolute;
-    top: -550%;
-    margin-left: 120px;
+#pic2{
+    background-image: url("../images/backPortugal.JPG");
 }
-
-.menu li ul li{
-    visibility: inherit;
-    display: block;
-    float: none;
-    margin-bottom: 50px;
+#pic3{
+    background-image: url("../images/paul.JPG");
+}
+#pic4{
+    background-image: url("../images/m&m.JPG");
+}
+#pic5{
+    background-image: url("../images/stairs.JPG");
+}
+#pic6{
+    background-image: url("../images/towerBridge.JPG");
 }
