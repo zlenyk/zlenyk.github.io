@@ -1,28 +1,30 @@
 window.addEventListener('keydown', doKeyDown, true);
 var canvas;
 var ctx;
-var rect;
+var board;
 var drawer;
+var sizeX = 300;
+var sizeY = 300;
+var bouncerHeight = 10;
+var bouncerWidth = 70;
+var gap = 0;
 function prepare(){
-    canvas = document.getElementById("canvas");
+    canvas = document.getElementById("gameCanvas");
+    canvas.width = sizeX;
+    canvas.height = sizeY;
     ctx = canvas.getContext("2d");
-    try{
+
     drawer = new Drawer(canvas);
-    rect = new Rect('purple',100,100,30,30);
-    }catch(err){ alert(err); }
+    board = new Board();
+
+    drawer.draw(board);
 }
 function doKeyDown(e) {
-    if ( e.keyCode == 87 ) {
-        rect.move(0,-10);
-    }
-    if ( e.keyCode == 83 ) {
-        rect.move(0,10);
-    }
     if ( e.keyCode == 65 ) {
-        rect.move(-10,0);
+        board.moveBouncer(-10);
     }
     if ( e.keyCode == 68 ) {
-        rect.move(10,0);
+        board.moveBouncer(10);
     }
-    drawer.draw(rect);
+    drawer.draw(board);
 }
