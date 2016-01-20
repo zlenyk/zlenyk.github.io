@@ -4,7 +4,7 @@ window.onload = function(){
 
 function prepareNewGame(){
     var canvas = document.getElementById('gameCanvas');
-    drawAllLines(canvas,10);
+    drawAllLines(canvas,12);
 }
 function drawAllLines(canvas,gap){
     var context = canvas.getContext('2d');
@@ -28,3 +28,11 @@ function drawLine(context,x1,y1,x2,y2){
     context.stroke();
     context.closePath();  
 } 
+function drawCircle(context,x,y){
+    var radius = 2;
+    context.beginPath();
+    context.arc(x,y,radius,0,2*Math.PI,false);
+    context.fillStyle = 'black';
+    context.fill();
+    context.stroke();
+}
