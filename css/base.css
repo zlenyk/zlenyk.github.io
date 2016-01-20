@@ -1,0 +1,49 @@
+html{
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+html, body{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#nameDiv{
+    position: absolute;
+    top: 60%;
+    width: 99%;
+    text-align: center;
+    color: white;
+    font-size: 200%;
+    font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif;
+}
+.imageDiv {
+    position: relative;
+    float: left;
+    background: none repeat scroll 0% 0% blue;
+    overflow: hidden;
+    width: 33.333%;
+    height: 50%;
+    background-size: cover;
+}
+#pic1{
+    background-image: url("../images/mitre.jpg");
+}
+#pic2{
+    background-image: url("../images/backPortugal.jpg");
+}
+#pic3{
+    background-image: url("../images/paul.jpg");
+}
+#pic4{
+    background-image: url("../images/m&m.jpg");
+}
+#pic5{
+    background-image: url("../images/stairs.jpg");
+}
+#pic6{
+    background-image: url("../images/towerBridge.jpg");
+}

@@ -1,0 +1,55 @@
+{
+  "name": "kinetic",
+  "version": "5.0.6",
+  "devDependencies": {
+    "grunt-contrib-jshint": "0.8.0",
+    "grunt-contrib-nodeunit": "0.3.2",
+    "grunt-contrib-uglify": "0.3.2",
+    "grunt-contrib-concat": "0.3.0",
+    "grunt-replace": "0.6.2",
+    "grunt-contrib-clean": "0.5.0",
+    "mocha": "1.17.1",
+    "chai": "1.9.0",
+    "phantomjs": "1.9.7-1",
+    "mocha-phantomjs": "3.3.2",
+    "grunt-cli": "0.1.13",
+    "grunt": "0.4.2",
+    "connect": "2.13.0",
+    "grunt-contrib-copy": "~0.5.0",
+    "jsdoc": "~3.3.0-alpha4",
+    "grunt-mocha-phantomjs": "~0.4.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-shell": "~0.6.4"
+  },
+  "keywords": [
+    "canvas",
+    "animations",
+    "graphic",
+    "html5"
+  ],
+  "browser": {
+    "canvas": false,
+    "jsdom": false
+  },
+  "bugs": {
+    "url": "https://github.com/ericdrowell/KineticJS/issues"
+  },
+  "readmeFilename": "README.md",
+  "main": "kinetic.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ericdrowell/KineticJS.git"
+  },
+  "author": {
+    "name": "Eric Rowell"
+  },
+  "license": "MIT",
+  "readme": "#Hiatus\n\nHi all! I will be taking a 3 month break from KineticJS (until July 2014) to focus on other endeavors.  KineticJS is in a great state right now (v5.1.0).  Please continue to file any issues that you may find, or submit pull requests.  They will eventually be addressed.\n\n#Installation\n\n* `bower install kineticjs`\n* `npm install kinetic` - for Browserify. For nodejs you have to install some [dependencies](#NodeJS)\n\n###NodeJS\n\nSupport of NodeJS is experimental.\n\nWe are using [node-canvas](https://github.com/LearnBoost/node-canvas) to create canvas element.\n\n1. Install node-canvas [https://github.com/LearnBoost/node-canvas/wiki/_pages](https://github.com/LearnBoost/node-canvas/wiki/_pages)\n2. `npm install jsdom`\n3. `npm install kinetic`\n\nSee file `nodejs-demo.js` for example.\n\n#Dev environment\n\nBefore doing all dev stuff make sure you have node installed. After that, run `npm install --dev` in the main directory to install the node module dependencies.\n\nRun `grunt --help` to see all build options.\n\n##Building the KineticJS Framework \n\nTo build a development version of the framework, run `grunt dev`. To run a full build, which also produces the minified version and the individually minified modules for the custom build, run `grunt full`.  You can also run `grunt beta` to generate a beta version.   \n\nIf you add a file in the src directory, be sure to add the filename to the sourceFiles array variable in Gruntfile.js.\n\n##Testing\n\n[![Build Status](https://travis-ci.org/ericdrowell/KineticJS.png)](https://travis-ci.org/ericdrowell/KineticJS)\n\nKineticJS uses Mocha for testing. \n\n* If you need run test only one time run `grunt test`.\n* While developing it is easy to use `grunt server` with watch task. Just run it and go to [http://localhost:8080/test/runner.html](http://localhost:8080/test/runner.html). After src file change kinetic-dev.js will be automatically created, so you just need refresh test the page.\n\nKineticJS is covered with hundreds of tests and well over a thousand assertions.  KineticJS uses TDD (test driven development) which means that every new feature or bug fix is accompanied with at least one new test. \n\n##Generation documentation\n\nRun `grunt docs` which will build the documentation files and place them in the docs folder.\n\n\n#Pull Requests\nI'd be happy to review any pull requests that may better the KineticJS project, in particular if you have a bug fix, enhancement, or a new shape (see `src/shapes` for examples).  Before doing so, please first make sure that all of the tests pass (`grunt test`). \n",
+  "_id": "kinetic@5.0.6",
+  "description": "Hi all! I will be taking a 3 month break from KineticJS (until July 2014) to focus on other endeavors.  KineticJS is in a great state right now (v5.1.0).  Please continue to file any issues that you may find, or submit pull requests.  They will eventually be addressed.",
+  "dist": {
+    "shasum": "ed2c936b02005c906326cfb0c05e3f54b6e108de"
+  },
+  "_from": "kinetic@",
+  "_resolved": "https://registry.npmjs.org/kinetic/-/kinetic-5.0.6.tgz"
+}

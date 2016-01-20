@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Canvas Test</title>
+<script src = 'scripts/game.js'></script>
+<script src = 'scripts/drawer.js'></script>
+<script src = 'scripts/rect.js'></script>
+<script src = 'scripts/board.js'></script>
+<script>
+window.onload = prepare;
+window.addEventListener('keydown',doKeyDown,true);
+</script>
+</head>
+<body onload="prepare()">
+
+
+<canvas id="gameCanvas" width="200" height="100" style="border:1px solid #000000;">
+Your browser does not support the HTML5 canvas tag.
+</canvas>
+
+</body>
+</html>
