@@ -1,5 +1,3 @@
-alert("ASD");
-
 window.onload = function(){
 	prepareNewGame();
 }
@@ -31,4 +29,3 @@ function getResults(filePath){
 	var results = new Results();
 	results.showResults(filePath);
 }
-
