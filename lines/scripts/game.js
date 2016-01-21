@@ -1,24 +1,88 @@
+'use strict';
 window.onload = function(){
-        prepareNewGame();   
-}
+        prepareNewGame();
+};
 
+var XCoords = [];
+var YCoords = [];
+var circles;
+var canvas;
+var context;
 function prepareNewGame(){
-    var canvas = document.getElementById('gameCanvas');
-    drawAllLines(canvas,12);
+    canvas = document.getElementById('gameCanvas');
+    canvas.addEventListener('mousedown',boardClicked,false);
+    context = canvas.getContext('2d');
+    getCoords(15);
+    drawCanvas(15);
 }
-function drawAllLines(canvas,gap){
-    var context = canvas.getContext('2d');
+function getCoords(gap){
     var h = canvas.height;
     var w = canvas.width;
-    for(var i=5.5 ; i<w ; i+=gap){
-        drawLine(context,0,i,h,i);
+    for(var i=5.5;i<h;i+=gap){
+        YCoords.push(i);
     }
-    for(var i=5.5 ; i<w ; i+=gap){
-        drawLine(context,i,0,i,h);
+    for(i=5.5;i<w;i+=gap){
+        XCoords.push(i);
     }
-    
+    circles = new Array(YCoords.length);
+    for(i=0;i<YCoords.length;i++){
+        circles[i] = new Array(XCoords.length);
+        for(var j=0;j<XCoords.length;j++){
+            circles[i][j] = 0; 
+        }
+    }
 }
-function drawLine(context,x1,y1,x2,y2){
+function drawCanvas(){
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    drawAllLines();
+    drawAllCircles();
+}
+function drawAllCircles(){
+    for(var i=0;i<YCoords.length;i++){
+        for(var j=0;j<XCoords.length;j++){
+            if(circles[i][j] == 1)
+                drawCircle(XCoords[j],YCoords[i]);
+        }
+    }
+}
+function drawAllLines(){
+    var h = canvas.height;
+    var w = canvas.width;
+    for(var i=0;i<YCoords.length;i++){
+        drawLine(0,YCoords[i],w,YCoords[i]);
+    }
+    for(i=0;i<XCoords.length;i++){
+        drawLine(XCoords[i],0,XCoords[i],h);
+    }
+}
+function boardClicked(event){
+    var x = event.pageX - canvas.offsetLeft;
+    var y = event.pageY - canvas.offsetTop;
+    var indexClicked = checkLineClicked(x,y);
+    if(indexClicked[0] > -1 && indexClicked[1] > -1){
+        circles[indexClicked[0]][indexClicked[1]] = 1;
+    }
+    drawCanvas();
+}
+function checkLineClicked(x,y){
+    var mistake = 4;
+    var Xclicked = -1;
+    var Yclicked = -1;
+    for(var i=0;i<XCoords.length;i++){
+        if(Math.abs(XCoords[i]-x) <= mistake){
+            Xclicked = i;
+            break;
+        }
+    }
+    for(i=0;i<YCoords.length;i++){
+        if(Math.abs(YCoords[i]-y) <= mistake){
+            Yclicked = i;
+            break;
+        }
+    }
+    return [Yclicked,Xclicked];
+}
+function drawLine(x1,y1,x2,y2){
     context.fillStyle = '#000';
     context.strokeStyle = '#000';
     context.beginPath();
@@ -28,7 +92,7 @@ function drawLine(context,x1,y1,x2,y2){
     context.stroke();
     context.closePath();  
 } 
-function drawCircle(context,x,y){
+function drawCircle(x,y){
     var radius = 2;
     context.beginPath();
     context.arc(x,y,radius,0,2*Math.PI,false);
