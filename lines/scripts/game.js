@@ -13,7 +13,7 @@ function prepareNewGame(){
     canvas.addEventListener('mousedown',boardClicked,false);
     context = canvas.getContext('2d');
     getCoords(15);
-    drawCanvas(15);
+    drawCanvas();
 }
 function getCoords(gap){
     var h = canvas.height;
@@ -41,7 +41,9 @@ function drawAllCircles(){
     for(var i=0;i<YCoords.length;i++){
         for(var j=0;j<XCoords.length;j++){
             if(circles[i][j] == 1)
-                drawCircle(XCoords[j],YCoords[i]);
+                drawCircle(XCoords[j],YCoords[i],'black');
+            else if(circles[i][j] == 2)
+                drawCircle(XCoords[j],YCoords[i],'blue');
         }
     }
 }
@@ -60,7 +62,9 @@ function boardClicked(event){
     var y = event.pageY - canvas.offsetTop;
     var indexClicked = checkLineClicked(x,y);
     if(indexClicked[0] > -1 && indexClicked[1] > -1){
-        circles[indexClicked[0]][indexClicked[1]] = 1;
+        circles[indexClicked[0]][indexClicked[1]]++;
+        if(circles[indexClicked[0]][indexClicked[1]] > 2)
+        circles[indexClicked[0]][indexClicked[1]] = 2;
     }
     drawCanvas();
 }
@@ -92,11 +96,11 @@ function drawLine(x1,y1,x2,y2){
     context.stroke();
     context.closePath();  
 } 
-function drawCircle(x,y){
+function drawCircle(x,y,color){
     var radius = 2;
     context.beginPath();
     context.arc(x,y,radius,0,2*Math.PI,false);
-    context.fillStyle = 'black';
+    context.fillStyle = color;
     context.fill();
     context.stroke();
 }
