@@ -1,0 +1,26 @@
+    Programowanie wypukłe, liniowe, liniowe całkowitoliczbowe (definicje, istnienie rozwiązań)
+    Formułowanie problemów optymalizacji kombinatorycznej w postaci zadań programowania liniowego lub liniowego całkowitoliczbowego
+    Algorytm sympleksowy w wersji geometrycznej (w tym: reguła Blanda, znajdowanie wierzchołka początkowego)
+    Dualność w programowaniu liniowym, lemat Farkasa, komplementarne warunki swobody
+    Ogólna postać tablicy sympleksowej, odczytywanie z tablicy rozwiązań pierwotnych i dualnych
+    Algorytm sympleksowy w wersji tablicowej (w tym: redukcja liczby kolumn, wyrocznia separująca)
+    Stany równowagi w grach, twierdzenie minimaksowe von Neumanna
+    Zbiory wypukłe i stożki wypukłe oraz ich własności (np. istnienie płaszczyzn oddzielających)
+    Wielościany i stożki wielościenne oraz ich własności (twierdzenie Minkowskiego-Weyla, twierdzenie o dekompozycji itp.)
+    Ściany, ściany minimalne i wierzchołki wielościanu (charakteryzacje)
+    Podstawowe twierdzenie programowania całkowitoliczbowego (w tym: idea dowodu)
+    Wielościany całkowitoliczbowe (charakteryzacje)
+    Macierze całkowicie unimodularne i ich znaczenie w problemach optymalizacji kombinatorycznej
+    Inne metody dowodzenia całkowitoliczbowości wielościanów (np. układy TDI)
+    Metoda pierwotno-dualna konstruowania algorytmów na przykładzie skojarzeń w grafach
+    Płaszczyzny odcinające Chvátala i ich własności, obcięcie Chvátala, rząd Chvátala
+    Algorytm Gomory’ego optymalizacji liniowej całkowitoliczbowej
+    Optymalizacja liniowa całkowitoliczbowa metodami podziałów z ograniczeniami (branch-and-bound) i podziałów z odcinaniem (branch-and-cut)
+    Elipsoidy i ich własności (np. twierdzenie Löwnera-Johna)
+    Algorytm elipsoidalny (warianty, wyrocznie separujące, liczba iteracji, modele obliczeń)
+    Algorytm wielomianowy programowania liniowego (w tym: ograniczenia na rozmiar rozwiązań)
+    Zastosowanie optymalizacji liniowej w algorytmach aproksymacyjnych (np. w problemie Bin Packing)
+    Programowanie półokreślone (definicje, istnienie rozwiązań, wyrocznia separująca)
+    Algorytm aproksymacyjny Goemansa-Williamsona do problemu maksymalnego przekroju
+    Grafy doskonałe (charakteryzacje)
+    Ciało TH, wielomianowe algorytmy do problemów zbioru niezależnego i kolorowania w grafach doskonałych
