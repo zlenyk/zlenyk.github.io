@@ -5,8 +5,12 @@
     Ogólna postać tablicy sympleksowej, odczytywanie z tablicy rozwiązań pierwotnych i dualnych
     Algorytm sympleksowy w wersji tablicowej (w tym: redukcja liczby kolumn, wyrocznia separująca)
     Stany równowagi w grach, twierdzenie minimaksowe von Neumanna
+
     Zbiory wypukłe i stożki wypukłe oraz ich własności (np. istnienie płaszczyzn oddzielających)
+	http://people.hss.caltech.edu/~kcb/Notes/SeparatingHyperplane.pdf
+
     Wielościany i stożki wielościenne oraz ich własności (twierdzenie Minkowskiego-Weyla, twierdzenie o dekompozycji itp.)
+	http://www.win.tue.nl/~rudi/polyhedra_handout.pdf
     Ściany, ściany minimalne i wierzchołki wielościanu (charakteryzacje)
     Podstawowe twierdzenie programowania całkowitoliczbowego (w tym: idea dowodu)
     Wielościany całkowitoliczbowe (charakteryzacje)
