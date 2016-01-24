@@ -8,10 +8,15 @@
 
     Zbiory wypukłe i stożki wypukłe oraz ich własności (np. istnienie płaszczyzn oddzielających)
 	http://people.hss.caltech.edu/~kcb/Notes/SeparatingHyperplane.pdf
+	https://courses.engr.illinois.edu/cs598csc/sp2010/Lectures/Lecture2.pdf
 
     Wielościany i stożki wielościenne oraz ich własności (twierdzenie Minkowskiego-Weyla, twierdzenie o dekompozycji itp.)
 	http://www.win.tue.nl/~rudi/polyhedra_handout.pdf
+	https://en.wikipedia.org/wiki/Cone_%28linear_algebra%29
+
     Ściany, ściany minimalne i wierzchołki wielościanu (charakteryzacje)
+	https://courses.engr.illinois.edu/cs598csc/sp2010/Lectures/Lecture3.pdf
+
     Podstawowe twierdzenie programowania całkowitoliczbowego (w tym: idea dowodu)
     Wielościany całkowitoliczbowe (charakteryzacje)
     Macierze całkowicie unimodularne i ich znaczenie w problemach optymalizacji kombinatorycznej
