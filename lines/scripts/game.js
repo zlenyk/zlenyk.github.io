@@ -12,6 +12,7 @@ var canvas;
 var context;
 var dotMove; //true,false (is now a dot or line move)
 var score;
+var lastDot;
 var initialPoints = [[1,-1],[2,-1],[3,-1],[4,-1],[4,0],[4,1],[4,2],
     [3,2],[2,2],[1,2],[1,3],[1,4],[1,5],[0,5],[-1,5],[-2,5],[-2,4],[-2,3],
     [-2,2],[-3,2],[-4,2],[-5,2],[-5,1],[-5,0],[-5,-1],[-4,-1],[-3,-1],[-2,-1],
@@ -21,6 +22,7 @@ function prepareNewGame(){
     YCoords = [];
     additionalLines = [];
     initialLines = [];
+    lastDot = [-1,-1];
     canvas = document.getElementById('gameCanvas');
     canvas.addEventListener('mousedown',boardClicked,false);
     context = canvas.getContext('2d');
@@ -30,6 +32,17 @@ function prepareNewGame(){
     drawCanvas(canvas);
     score = 0;
     refreshScore();
+}
+function undoLastDot(){
+    if(lastDot[0] != -1 && !dotMove){
+        circles[lastDot[0]][lastDot[1]] = 0;
+        for(var i=0;i<YCoords.length;i++)
+            for(var j=0;j<XCoords.length;j++)
+                if(circles[i][j] == 2) circles[i][j] = 1;
+        lastDot = [-1,-1];
+        dotMove = !dotMove;
+        drawCanvas();
+    }
 }
 function prepareCirclesArray(){
     circles = new Array(YCoords.length);
@@ -165,6 +178,7 @@ function boardClicked(event){
         var value = circles[indexClicked[0]][indexClicked[1]]; 
         if(dotMove && value === 0){
             circles[indexClicked[0]][indexClicked[1]]++;
+            lastDot = [indexClicked[0],indexClicked[1]];
             dotMove = !dotMove;
         }else if(!dotMove && value === 1){
             circles[indexClicked[0]][indexClicked[1]]++;
