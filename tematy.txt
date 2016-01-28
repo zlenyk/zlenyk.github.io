@@ -4,7 +4,9 @@
     Dualność w programowaniu liniowym, lemat Farkasa, komplementarne warunki swobody
     Ogólna postać tablicy sympleksowej, odczytywanie z tablicy rozwiązań pierwotnych i dualnych
     Algorytm sympleksowy w wersji tablicowej (w tym: redukcja liczby kolumn, wyrocznia separująca)
+
     Stany równowagi w grach, twierdzenie minimaksowe von Neumanna
+	http://people.seas.harvard.edu/~yaron/AM221/lecture_notes/AM221_lecture6.pdf
 
     Zbiory wypukłe i stożki wypukłe oraz ich własności (np. istnienie płaszczyzn oddzielających)
 	http://people.hss.caltech.edu/~kcb/Notes/SeparatingHyperplane.pdf
