@@ -1,9 +1,16 @@
     Programowanie wypukłe, liniowe, liniowe całkowitoliczbowe (definicje, istnienie rozwiązań)
     Formułowanie problemów optymalizacji kombinatorycznej w postaci zadań programowania liniowego lub liniowego całkowitoliczbowego
     Algorytm sympleksowy w wersji geometrycznej (w tym: reguła Blanda, znajdowanie wierzchołka początkowego)
+	http://smurf.mimuw.edu.pl/node/1122
+
     Dualność w programowaniu liniowym, lemat Farkasa, komplementarne warunki swobody
+	https://www.math.ucla.edu/~tom/LP.pdf
+
     Ogólna postać tablicy sympleksowej, odczytywanie z tablicy rozwiązań pierwotnych i dualnych
+	http://www.unc.edu/depts/stat-or/courses/provan/STOR614_web/lect03_simplex.pdf
+
     Algorytm sympleksowy w wersji tablicowej (w tym: redukcja liczby kolumn, wyrocznia separująca)
+	http://www.trentu.ca/academic/math/bz/341-l06.pdf
 
     Stany równowagi w grach, twierdzenie minimaksowe von Neumanna
 	http://people.seas.harvard.edu/~yaron/AM221/lecture_notes/AM221_lecture6.pdf
@@ -20,18 +27,36 @@
 	https://courses.engr.illinois.edu/cs598csc/sp2010/Lectures/Lecture3.pdf
 
     Podstawowe twierdzenie programowania całkowitoliczbowego (w tym: idea dowodu)
+	otoczka wypukła punktów całkowitych wielościanu wymiernego jest wielościanem wymiernym
+	"the convex hull of feasible points in a mixed integer linear set defined by rational data is a polyhedron"
+
     Wielościany całkowitoliczbowe (charakteryzacje)
     Macierze całkowicie unimodularne i ich znaczenie w problemach optymalizacji kombinatorycznej
+	https://courses.engr.illinois.edu/cs598csc/sp2010/Lectures/Lecture4.pdf
     Inne metody dowodzenia całkowitoliczbowości wielościanów (np. układy TDI)
+
     Metoda pierwotno-dualna konstruowania algorytmów na przykładzie skojarzeń w grafach
+	http://smurf.mimuw.edu.pl/node/1147
+
     Płaszczyzny odcinające Chvátala i ich własności, obcięcie Chvátala, rząd Chvátala
+	http://cgm.cs.mcgill.ca/~avis/courses/567/notes/jochen.pdf
+
     Algorytm Gomory’ego optymalizacji liniowej całkowitoliczbowej
+	http://cgm.cs.mcgill.ca/~avis/courses/567/notes/jochen.pdf
+
     Optymalizacja liniowa całkowitoliczbowa metodami podziałów z ograniczeniami (branch-and-bound) i podziałów z odcinaniem (branch-and-cut)
     Elipsoidy i ich własności (np. twierdzenie Löwnera-Johna)
+	http://www.math.uiuc.edu/documenta/vol-ismp/24_henk-martin.pdf
     Algorytm elipsoidalny (warianty, wyrocznie separujące, liczba iteracji, modele obliczeń)
+	http://www.cs.cmu.edu/afs/cs.cmu.edu/academic/class/15859-f11/www/notes/lecture08.pdf
+
     Algorytm wielomianowy programowania liniowego (w tym: ograniczenia na rozmiar rozwiązań)
     Zastosowanie optymalizacji liniowej w algorytmach aproksymacyjnych (np. w problemie Bin Packing)
     Programowanie półokreślone (definicje, istnienie rozwiązań, wyrocznia separująca)
+	http://www.cs.cmu.edu/~anupamg/adv-approx/lecture14.pdf
     Algorytm aproksymacyjny Goemansa-Williamsona do problemu maksymalnego przekroju
+	http://www.cs.toronto.edu/~avner/teaching/2411/LN/12/lecture12.pdf
     Grafy doskonałe (charakteryzacje)
     Ciało TH, wielomianowe algorytmy do problemów zbioru niezależnego i kolorowania w grafach doskonałych
+
+Simplex super wytłumaczony: http://smurf.mimuw.edu.pl/node/1122 (Reguła Blandta,znajdowanie początkowego wierzchołka)
