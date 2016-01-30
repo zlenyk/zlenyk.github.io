@@ -102,9 +102,13 @@ function fillLines(){
     }
     if(p2.x != -1){
         if(arePointsGood(firstPoint[0],firstPoint[1],secondPoint[0],secondPoint[1])){
+            if(p1.x > p2.x)
+                p2 = [p1,p1=p2][0];
+            else if(p1.x == p2.x && p1.y > p2.y)
+                p2 = [p1,p1=p2][0];
             var line = new Line(p1,p2);
             if(arrayHasLine(additionalLines,line) == false){
-                additionalLines.push(new Line(p1,p2));
+                additionalLines.push(line);
                 dotMove = !dotMove;
                 score++;
                 refreshScore();
@@ -125,6 +129,7 @@ function arrayHasLine(array,line){
             array[i].p2.x == line.p2.x &&
             array[i].p2.y == line.p2.y)
             return true;
+        if(lineOnOther(array[i],line)) return true;
     }
     return false;
 }
@@ -144,6 +149,22 @@ function arePointsGood(x1,y1,x2,y2){
         }
     }
     return true;
+}
+/*  true if are on same line
+ * */
+function crossProduct(p1,p2,p3){
+    return ((p3.y-p1.y)*(p2.x-p1.x)-(p3.x-p1.x)*(p2.y-p1.y) == 0);
+}
+function lineOnOther(l1,l2){
+    if(
+        crossProduct(l1.p1,l2.p1,l2.p2) && 
+        crossProduct(l1.p2,l2.p1,l2.p2) && 
+        ((l1.p1.x > l2.p1.x && l1.p1.x < l2.p2.x) ||
+         (l1.p1.y > l2.p1.y && l1.p1.y < l2.p2.y) ||
+         (l1.p2.x > l2.p1.x && l1.p2.x < l2.p2.x) ||
+         (l1.p2.y > l2.p1.y && l1.p2.y < l2.p2.y))
+      )
+        return true;
 }
 /*
  * Just drawing circles from array circles
