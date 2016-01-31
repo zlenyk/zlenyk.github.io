@@ -2,7 +2,10 @@
 <html>
 	<head>
 		<link rel='stylesheet' type='text/css' href='css/lines.css' />
+		<script type='text/javascript' src = 'scripts/point.js'></script>
+		<script type='text/javascript' src = 'scripts/line.js'></script>
 		<script type='text/javascript' src = 'scripts/draw.js'></script>
+		<script type='text/javascript' src = 'scripts/BoardManager.js'></script>
 		<script type='text/javascript' src = 'scripts/game.js'></script>
 	</head>
 	<body>
@@ -14,13 +17,13 @@
                             Narysuj kropke a nastepnie polacz linia 5 kolejnych kropek.
 			</p>
 		</header>
+                <canvas id="gameCanvas" width="520" height="520"></canvas>
                 <form action='javascript:prepareNewGame()'>
                     <input type='submit' value='New Game' />
                 </form>
+		<div id='score'></div>
                 <form action='javascript:undoLastDot()'>
                     <input type='submit' value='Cofnij' />
                 </form>
-		<div id='score'></div>
-                <canvas id="gameCanvas" width="450" height="450"></canvas>
 	</body>
 </html>
