@@ -23,7 +23,7 @@ function prepareNewGame(){
 function undoLastDot(){
     if(lastPoint.x != -1 && !dotMove){
         boardManager.erasePoint(lastPoint);
-        lastDot = new Point(-1,-1);
+        lastPoint = new Point(-1,-1);
         dotMove = !dotMove;
         boardManager.flushCheck();
     }
