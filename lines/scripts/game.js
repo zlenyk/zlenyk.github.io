@@ -28,7 +28,7 @@ function undoLastDot(){
         boardManager.flushCheck();
     }
 }
-function endOfGame(){
+function endGame(){
     alert("Your score: "+score+"\n"+"Congratulations!");
     prepareNewGame();
 }
@@ -64,7 +64,7 @@ function playAutomatically(){
         }
         if(checkEndOfGame()){
             clearInterval(myInterval);
-            alert('end');
+            endGame();
         }
     }, 100);
 }
