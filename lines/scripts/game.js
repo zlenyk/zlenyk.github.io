@@ -20,6 +20,11 @@ function prepareNewGame(){
     score = 0;
     refreshScore();
 }
+function help(){
+    if(dotMove){
+        boardManager.blinkPoint(boardManager.getClickablePoint());
+    }
+}
 function undoLastDot(){
     if(lastPoint.x != -1 && !dotMove){
         boardManager.erasePoint(lastPoint);
@@ -28,7 +33,7 @@ function undoLastDot(){
         boardManager.flushCheck();
     }
 }
-function endOfGame(){
+function endGame(){
     alert("Your score: "+score+"\n"+"Congratulations!");
     prepareNewGame();
 }
@@ -64,7 +69,7 @@ function playAutomatically(){
         }
         if(checkEndOfGame()){
             clearInterval(myInterval);
-            alert('end');
+            endGame();
         }
     }, 100);
 }

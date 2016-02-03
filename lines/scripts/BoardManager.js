@@ -197,6 +197,10 @@ var BoardManager = function(canvas){
                 else if(this.circles[i][j] == 2){
                     drawCircle(this.canvas,this.XCoords[i],this.YCoords[j],'blue');
                 }
+                else if(this.circles[i][j] == 3){
+                    drawCircle(this.canvas,this.XCoords[i],this.YCoords[j],'yellow');
+                }
+                
             }
         }
     };
@@ -245,6 +249,26 @@ var BoardManager = function(canvas){
         }
         this.drawBoard();
         return true;
+    };
+    this.blinkPoint = function(p){
+        var r = this.pointClicked(p);
+        var res = r[0];var indexP = r[1];
+        var blinked = false;
+        var that = this;
+        var myInterval = setInterval(function(){
+            if(!blinked){
+                try{
+                blinked = true;
+                that.circles[indexP.x][indexP.y] = 3;
+                that.drawBoard();
+                }catch(err){alert(err);}
+            }
+            else{
+                that.circles[indexP.x][indexP.y] = 0;
+                that.drawBoard();
+                clearInterval(myInterval);
+            }
+        },500);
     };
     this.checkedPoints = function(){
         var res = [];
