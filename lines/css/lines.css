@@ -1,9 +1,22 @@
-#gameCanvas{
-	border:1px solid;
-	top:100;
-	left:100;
+#mainPage{
+    height:200px;
+    width:10%;
+    float: left;
 }
-#wrapper{
+#gameWrapper{
     float: left;
     width: 530px;
+}
+#instructionDiv{
+    float: left;
+    width: 40%;
+}
+#gameCanvas{
+	border:1px solid;
+}
+
+#canvasWrapper{
+}
+#buttonsWrapper{
+    margin-bottom: 10px;
 }

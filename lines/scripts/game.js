@@ -47,7 +47,7 @@ function undoLastDot(){
 }
 function endGame(){
     alert("Your score: "+score+"\n"+"Congratulations!");
-    prepareNewGame();
+    canvas.removeEventListener('mousedown',boardClicked,false);
 }
 function checkEndOfGame(){
     var p = boardManager.getClickablePoint();
