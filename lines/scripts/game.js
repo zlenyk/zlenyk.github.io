@@ -25,6 +25,18 @@ function help(){
         boardManager.blinkPoint(boardManager.getClickablePoint());
     }
 }
+function instruction(){
+    var but = document.getElementById("but");
+    var div = document.getElementById("instructionText");
+    if(but.value == "Instruction"){
+        div.innerHTML = "The game constists of only two types of move that are done repeatedly one after another.<br />1) draw a dot somewhere on a board<br />2) join 5 consecutive dots to form a line (verticaly, horizontaly, 45deg)<br />For each line you get a point. The game will inform you when there is no more moves to be done.<br />You can click Help when you can not see where you can put a dot. Yellow dot will blink in a feasible place.<br />";
+        but.value = "Hide";
+    }
+    else{
+        div.innerHTML = "";
+        but.value = "Instruction";
+    }
+}
 function undoLastDot(){
     if(lastPoint.x != -1 && !dotMove){
         boardManager.erasePoint(lastPoint);

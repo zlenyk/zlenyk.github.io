@@ -1,6 +1,9 @@
 #gameCanvas{
-	float:left;
 	border:1px solid;
 	top:100;
 	left:100;
+}
+#wrapper{
+    float: left;
+    width: 530px;
 }

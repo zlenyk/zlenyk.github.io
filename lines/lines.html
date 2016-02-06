@@ -1,40 +1,47 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<link rel='stylesheet' type='text/css' href='css/lines.css' />
-		<script type='text/javascript' src = 'scripts/point.js'></script>
-		<script type='text/javascript' src = 'scripts/line.js'></script>
-		<script type='text/javascript' src = 'scripts/draw.js'></script>
-		<script type='text/javascript' src = 'scripts/BoardManager.js'></script>
-		<script type='text/javascript' src = 'scripts/game.js'></script>
+		<link rel="stylesheet" type="text/css" href="css/lines.css" />
+		<script type="text/javascript" src = "scripts/point.js"></script>
+		<script type="text/javascript" src = "scripts/line.js"></script>
+		<script type="text/javascript" src = "scripts/draw.js"></script>
+		<script type="text/javascript" src = "scripts/BoardManager.js"></script>
+		<script type="text/javascript" src = "scripts/game.js"></script>
 	</head>
 	<body>
-		<div id='mainPage'>
-			<a href='../index.html'>Main Page</a>
+		<div id="mainPage">
+			<a href="../index.html">Main Page</a>
 		</div>
 		<header>
 			<p>
-                            Narysuj kropke a nastepnie polacz linia 5 kolejnych kropek.
+                            Draw a dot, join 5 dots in a line.
 			</p>
 		</header>
+                <div id="wrapper">
                 <canvas id="gameCanvas" width="520" height="520"></canvas>
-                <form action='javascript:prepareNewGame()'>
-                    <input type='submit' value='New Game' />
+                </div>
+                <div id="buttonsWrapper">
+                <form action="javascript:prepareNewGame()">
+                    <input type="submit" value="New Game" />
                 </form>
-		<div id='score'> </div>
-                <form action='javascript:undoLastDot()'>
-                    <input type='submit' value='Cofnij' />
+		<div id="score"> </div>
+                <form action="javascript:undoLastDot()">
+                    <input type="submit" value="Back" />
                 </form>
-                <form action='javascript:help()'>
-                    <input type='submit' value='Help' />
+                <form action="javascript:help()">
+                    <input type="submit" value="Help" />
                 </form>
-<!--                <form action='javascript:playAutomatically()'>
-                    <input type='submit' value='Auto' />
+                <div id="footer">
+                    <input onclick="instruction()" type="button" value="Instruction" id="but"></input>
+                    <div id="instructionText"></div>
+                </div>
+<!--                <form action="javascript:playAutomatically()">
+                    <input type="submit" value="Auto" />
                 </form>
-                <form action='javascript:test()'>
-                    <input type='submit' value='Test' />
+                <form action="javascript:test()">
+                    <input type="submit" value="Test" />
                 </form>
--->		<div id='test'> </div>
-
+-->		</div>
+                <div id="test"> </div>
                 </body>
 </html>
