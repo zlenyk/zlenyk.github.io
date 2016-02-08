@@ -45,9 +45,30 @@ function undoLastDot(){
         boardManager.flushCheck();
     }
 }
+function getResults(){
+    $.ajax({
+        type: 'POST',
+        url: 'http://127.0.0.1:8080/',
+        data: {},
+        dataType: 'json',
+        success: function(data){
+            for(var i=0;i<data.length;i++){
+                $('#results').append(data[i].NAME+' '+data[i].RESULT+'<br/>');
+            }
+        }
+    });
+
+}
 function endGame(){
     alert("Your score: "+score+"\n"+"Congratulations!");
-    canvas.removeEventListener('mousedown',boardClicked,false);
+    $.post('http://127.0.0.1:8080/submit',
+            {
+                name: $('#name').val(),
+                result: $('#result').val()
+            },
+            function(data){}
+          )
+        canvas.removeEventListener('mousedown',boardClicked,false);
 }
 function checkEndOfGame(){
     var p = boardManager.getClickablePoint();
