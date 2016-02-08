@@ -55,16 +55,16 @@ function getResults(){
         success: function(data){
             $('#results').html('BEST RESULTS: <br/>');
             for(var i=0;i<data.length;i++){
-                $('#results').append(+data[i].RESULT+'<br/>');
+                $('#results').append(data[i].NAME+' '+data[i].RESULT+'<br/>');
             }
         },
     });
 }
 function endGame(){
-    alert("Your score: "+score+"\n"+"Congratulations!");
+    var name = prompt("Your score: "+score+"\n"+"Congratulations!","Your Name");
     $.post('http://lineserver-zlenyk.rhcloud.com/submit',
             {
-                name: 'name',
+                name: name,
                 result: score 
             },
             function(data){}
