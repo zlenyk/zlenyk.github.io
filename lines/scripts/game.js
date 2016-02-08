@@ -53,8 +53,9 @@ function getResults(){
         data: {},
         dataType: 'json',
         success: function(data){
+            $('#results').html('BEST RESULTS: <br/>');
             for(var i=0;i<data.length;i++){
-                $('#results').append(data[i].NAME+' '+data[i].RESULT+'<br/>');
+                $('#results').append(+data[i].RESULT+'<br/>');
             }
         },
     });
