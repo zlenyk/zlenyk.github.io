@@ -12,9 +12,8 @@ function drawLine(canvas,line,width,color){
     context.stroke();
     context.closePath();  
 } 
-function drawCircle(canvas,x,y,color){
+function drawCircle(canvas,x,y,color,radius){
     var context = canvas.getContext('2d');
-    var radius = 2;
     context.beginPath();
     context.arc(x,y,radius,0,2*Math.PI,false);
     context.fillStyle = color;

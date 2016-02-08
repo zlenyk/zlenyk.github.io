@@ -14,13 +14,17 @@ var BoardManager = function(canvas){
         this.getCoords(20);
         this.prepareCirclesArray();
     };
+    /* Drawing board from arrays content
+     */
     this.drawBoard = function(){
         var context = this.canvas.getContext('2d'); 
         context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.drawLines(this.initialLines,1,'black');
-        this.drawLines(this.additionalLines,3,'#005100');
+        this.drawLines(this.additionalLines,3,'#005100'); //dark green
         this.drawAllCircles();
     };
+    /* filling coordinates arrays
+     */
     this.getCoords = function(gap){
         var h = this.canvas.height;
         var w = this.canvas.width;
@@ -193,12 +197,12 @@ var BoardManager = function(canvas){
         for(var i=0;i<this.XCoords.length;i++){
             for(var j=0;j<this.YCoords.length;j++){
                 if(this.circles[i][j] == 1)
-                    drawCircle(this.canvas,this.XCoords[i],this.YCoords[j],'black');
+                    drawCircle(this.canvas,this.XCoords[i],this.YCoords[j],'black',2);
                 else if(this.circles[i][j] == 2){
-                    drawCircle(this.canvas,this.XCoords[i],this.YCoords[j],'blue');
+                    drawCircle(this.canvas,this.XCoords[i],this.YCoords[j],'blue',2);
                 }
                 else if(this.circles[i][j] == 3){
-                    drawCircle(this.canvas,this.XCoords[i],this.YCoords[j],'yellow');
+                    drawCircle(this.canvas,this.XCoords[i],this.YCoords[j],'red',3);
                 }
                 
             }
