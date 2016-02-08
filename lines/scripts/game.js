@@ -19,6 +19,7 @@ function prepareNewGame(){
     dotMove = true;
     score = 0;
     refreshScore();
+    getResults();
 }
 function help(){
     if(dotMove){
@@ -48,25 +49,28 @@ function undoLastDot(){
 function getResults(){
     $.ajax({
         type: 'POST',
-        url: 'http://127.0.0.1:8080/',
+        url: 'http://lineserver-zlenyk.rhcloud.com/',
         data: {},
         dataType: 'json',
         success: function(data){
+            alert('sd');
             for(var i=0;i<data.length;i++){
                 $('#results').append(data[i].NAME+' '+data[i].RESULT+'<br/>');
             }
+        },
+        fail: function(data){
+            alert('fail');
         }
     });
-
 }
 function endGame(){
     alert("Your score: "+score+"\n"+"Congratulations!");
-    $.post('http://127.0.0.1:8080/submit',
+    $.post('http://lineserver-zlenyk.rhcloud.com/submit',
             {
-                name: $('#name').val(),
-                result: $('#result').val()
+                name: 'name',
+                result: score 
             },
-            function(data){}
+            function(data){alert('OK');}
           )
         canvas.removeEventListener('mousedown',boardClicked,false);
 }
