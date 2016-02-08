@@ -53,14 +53,10 @@ function getResults(){
         data: {},
         dataType: 'json',
         success: function(data){
-            alert('sd');
             for(var i=0;i<data.length;i++){
                 $('#results').append(data[i].NAME+' '+data[i].RESULT+'<br/>');
             }
         },
-        fail: function(data){
-            alert('fail');
-        }
     });
 }
 function endGame(){
@@ -70,7 +66,7 @@ function endGame(){
                 name: 'name',
                 result: score 
             },
-            function(data){alert('OK');}
+            function(data){}
           )
         canvas.removeEventListener('mousedown',boardClicked,false);
 }
