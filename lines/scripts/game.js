@@ -61,6 +61,7 @@ function getResults(){
     });
 }
 function endGame(){
+    dotMove = false;    //it is only for help button not to work
     var name = prompt("Your score: "+score+"\n"+"Congratulations!","Your Name");
     $.post('http://lineserver-zlenyk.rhcloud.com/submit',
             {
