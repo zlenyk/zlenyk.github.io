@@ -8,14 +8,28 @@ var dotMove; //true,false (is now a dot or line move)
 var score;
 var lastPoint;
 var boardManager;
+var offsetX = 0;
+var offsetY = 0;
+var startX = 0;
+var startY = 0;
+var mouseDownFlag = false;
 
 function prepareNewGame(){
     canvas = document.getElementById('gameCanvas');
+    offsetX = (canvas.width-1000)/2;
+    offsetY = (canvas.height-1000)/2;
     boardManager = new BoardManager(canvas);
     boardManager.init();
+    try{
+    boardManager.setOffset(offsetX,offsetY);
     boardManager.drawBoard();
+    }catch(err){alert(err);}
     lastPoint - new Point(-1,-1);
-    canvas.addEventListener('mousedown',boardClicked,false);
+    canvas.addEventListener('click',boardClicked,false);
+    canvas.addEventListener('mousedown',mouseDown,false);
+    canvas.addEventListener('mouseup',mouseUp,false);
+    canvas.addEventListener('mouseout',mouseUp,false);
+    canvas.addEventListener('mousemove',mouseMove,false);
     dotMove = true;
     score = 0;
     refreshScore();
@@ -113,8 +127,9 @@ function playAutomatically(){
  * repaints board
  */
 function boardClicked(event){
-    var x = event.pageX - canvas.offsetLeft;
-    var y = event.pageY - canvas.offsetTop;
+    if(mouseDownFlag) return;
+    var x = event.pageX - canvas.offsetLeft-offsetX;
+    var y = event.pageY - canvas.offsetTop-offsetY;
     checkBoard(new Point(x,y));
     if(!dotMove){
         searchForNewLine();
@@ -144,5 +159,25 @@ function searchForNewLine(){
             refreshScore();
         }
         boardManager.flushCheck();
+    }
+}
+function mouseDown(event){ 
+    mouseDownFlag = true; 
+    startX = event.pageX;
+    startY = event.pageY;
+}
+function mouseUp(event){ mouseDownFlag = false; }
+function mouseMove(event){ 
+    if(mouseDownFlag){
+        var x = Math.round((startX-event.pageX)/50);
+        var y = Math.round((startY-event.pageY)/50);
+        offsetX -= x;
+        offsetY -= y;
+        if(offsetX > 0) offsetX = 0;
+        if(offsetX < canvas.width-1000) offsetX = canvas.width-1000;
+        if(offsetY > 0) offsetY = 0;
+        if(offsetY < canvas.height-1000) offsetY = canvas.height-1000;
+        boardManager.setOffset(offsetX,offsetY);
+        boardManager.drawBoard();
     }
 }

@@ -4,6 +4,8 @@ var BoardManager = function(canvas){
     this.additionalLines = [];
     this.XCoords = [];
     this.YCoords = [];
+    this.offsetX = 0;
+    this.offsetY = 0;
     this.initialPoints = [[1,-1],[2,-1],[3,-1],[4,-1],[4,0],[4,1],[4,2],
     [3,2],[2,2],[1,2],[1,3],[1,4],[1,5],[0,5],[-1,5],[-2,5],[-2,4],[-2,3],
     [-2,2],[-3,2],[-4,2],[-5,2],[-5,1],[-5,0],[-5,-1],[-4,-1],[-3,-1],[-2,-1],
@@ -14,6 +16,10 @@ var BoardManager = function(canvas){
         this.getCoords(20);
         this.prepareCirclesArray();
     };
+    this.setOffset = function(offsetX,offsetY){
+        this.offsetX = offsetX;
+        this.offsetY = offsetY;
+    }
     /* Drawing board from arrays content
      */
     this.drawBoard = function(){
@@ -26,8 +32,10 @@ var BoardManager = function(canvas){
     /* filling coordinates arrays
      */
     this.getCoords = function(gap){
-        var h = this.canvas.height;
-        var w = this.canvas.width;
+        var h = 1000;
+        var w = 1000;
+//        var h = this.canvas.height;
+//        var w = this.canvas.width;
         for(var i=5.5;i<h;i+=gap){
             this.YCoords.push(i);
             this.initialLines.push(new Line(new Point(0,i),new Point(w,i)));
@@ -197,12 +205,12 @@ var BoardManager = function(canvas){
         for(var i=0;i<this.XCoords.length;i++){
             for(var j=0;j<this.YCoords.length;j++){
                 if(this.circles[i][j] == 1)
-                    drawCircle(this.canvas,this.XCoords[i],this.YCoords[j],'black',2);
+                    drawCircle(this.canvas,this.XCoords[i],this.YCoords[j],'black',2,this.offsetX,this.offsetY);
                 else if(this.circles[i][j] == 2){
-                    drawCircle(this.canvas,this.XCoords[i],this.YCoords[j],'blue',2);
+                    drawCircle(this.canvas,this.XCoords[i],this.YCoords[j],'blue',2,this.offsetX,this.offsetY);
                 }
                 else if(this.circles[i][j] == 3){
-                    drawCircle(this.canvas,this.XCoords[i],this.YCoords[j],'red',3);
+                    drawCircle(this.canvas,this.XCoords[i],this.YCoords[j],'red',3,this.offsetX,this.offsetY);
                 }
                 
             }
@@ -213,7 +221,7 @@ var BoardManager = function(canvas){
      */
     this.drawLines = function(linesArray,width,color){
         linesArray.forEach(function(l){
-            drawLine(canvas,l,width,color);
+            drawLine(canvas,l,width,color,this.offsetX,this.offsetY);
         });
     };
     this.erasePoint = function(p){
