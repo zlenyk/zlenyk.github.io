@@ -33,7 +33,7 @@ function prepareNewGame(){
     dotMove = true;
     score = 0;
     refreshScore();
-    getResults();
+    //getResults();
 }
 function help(){
     if(dotMove){
@@ -76,15 +76,18 @@ function getResults(){
 }
 function endGame(){
     dotMove = false;    //it is only for help button not to work
+    alert("Your score: "+score+"\n"+"Congratulations!");
+   /*
     var name = prompt("Your score: "+score+"\n"+"Congratulations!","Your Name");
     $.post('http://lineserver-zlenyk.rhcloud.com/submit',
             {
                 name: name,
-                result: score 
+                result: score
             },
             function(data){}
           )
         canvas.removeEventListener('mousedown',boardClicked,false);
+   */
 }
 function checkEndOfGame(){
     var p = boardManager.getClickablePoint();
@@ -99,7 +102,7 @@ function refreshScore(){
 function test(){
     var div = document.getElementById('test');
     div.innerHTML = '';
-    var arr = boardManager.getPointsBetween(new Point(10,10),new Point(10,6)); 
+    var arr = boardManager.getPointsBetween(new Point(10,10),new Point(10,6));
     for(var i=0;i<arr.length;i++){
         div.innerHTML += arr[i].x + ' ' + arr[i].y + '\n';
     }
@@ -123,7 +126,7 @@ function playAutomatically(){
     }, 100);
 }
 /* Check what intersetcion was clicked,
- * allows dots to be drawn/colored when dotMove is true/false 
+ * allows dots to be drawn/colored when dotMove is true/false
  * repaints board
  */
 function boardClicked(event){
@@ -161,13 +164,13 @@ function searchForNewLine(){
         boardManager.flushCheck();
     }
 }
-function mouseDown(event){ 
-    mouseDownFlag = true; 
+function mouseDown(event){
+    mouseDownFlag = true;
     startX = event.pageX;
     startY = event.pageY;
 }
 function mouseUp(event){ mouseDownFlag = false; }
-function mouseMove(event){ 
+function mouseMove(event){
     if(mouseDownFlag){
         var x = Math.round((startX-event.pageX)/50);
         var y = Math.round((startY-event.pageY)/50);

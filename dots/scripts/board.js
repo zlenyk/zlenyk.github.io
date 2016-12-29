@@ -5,7 +5,7 @@ var Board = function(){
 	var game_el = document.querySelector('#game');
 	game_el.style.height = gameHeight;
 	game_el.style.width = gameWidth;
-	
+
 	var stage = null;
 
 	this.prepareNewBoard = function(){
@@ -18,6 +18,7 @@ var Board = function(){
 
 		this.drawBoard();
 	}
+
 	this.drawBoard = function(){
 		var layer = new Kinetic.Layer();
 		var c = gameWidth/size;
@@ -25,7 +26,7 @@ var Board = function(){
 			for(var j = 0; j<size; j++){
 				layer.add(this.drawCircle(layer,i*c+c/2 , j*c+c/2 ,smallDotSize));
 			}
-		}	
+		}
 		this.stage.add(layer);
 	}
 
@@ -44,16 +45,19 @@ var Board = function(){
 		});
 		return circle;
 	}
-	this.circleClicked = function(circle){	
+	this.circleClicked = function(circle){
 		if(circle.radius() != bigDotSize){
 			this.clicked++;
 		}
 		click();						//function in game that controls timer
 	}
+
 	this.getClickedCount = function(){
 		return this.clicked;
 	}
+
 	this.destroyBoard = function(){
 		this.stage.destroy();
 	}
+	
 }
