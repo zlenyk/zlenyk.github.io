@@ -1,0 +1,53 @@
+---
+layout: post
+title:  "AI is not biased, nor is training data. Your questions are"
+date:   2023-12-22
+categories: jekyll update
+bibliography: bias_in_aireferences.bib
+---
+Whenever we have a new development in AI, we have a few, always the same, follow-up discussions. Here they are:
+- is it safe (will it kill us)?
+- is it safe (can someone use it to kill us)?
+- is it safe (will children be harmed from interacting with it)?
+- it is biased[^1]
+
+You can notice that the last one is not posed as a question. Being of the opinion that new models are biased became accepted position,
+which vagueness allows it to be always true and usually one example is enough to prove it.
+As you can tell from my negative tone I am not a fan of this statement, and while I am not necessarily saying it is wrong, I think using it usually comes from interpreting AI output of ill-posed questions.
+
+[^1]: Unfortunately, when talking about bias, journalists usually refer to bias in cultural aspect, not in more precise, technical one (https://en.wikipedia.org/wiki/Bias_of_an_estimator)
+
+# AI bias, training-data bias, question bias
+
+The criticism of "AI is biased" usually goes like: "Of course AI is biased because it is a mirror of humanity and the content we create, so naturally it will inherit opinions of an average internet user", therefore changing the focus from design of models to distribution of training data. In many cases this discussion is a valid one. If a model was designed to perform task X, and we use it to perform that task directly, we should expect the model to be well calibrated (matching model's confidence with probability of correct answer). Good example of that is [^2], where authors test models for detecting AI-generated text and uncover big gap in performance for english and non-english inputs. If distribution of training data doesn't match distribution of test data, generally bad things will happen, some of which we can call "bias". This is not the case I want to discuss here.
+
+More interesting case is when the task of the model is more vague, like with generative models. This usually happens, when the form of model output gives an unfortunate opportunity to the model's user to interpret it's output in more abstract way. Examples come in multiple domains:
+- **Text generation:**
+    - [ChatGPT leans liberal, research shows](https://www.washingtonpost.com/technology/2023/08/16/chatgpt-ai-political-bias-research/)
+    - [Uncovering The Different Types Of ChatGPT Bias](https://www.forbes.com/sites/forbestechcouncil/2023/03/31/uncovenegativering-the-different-types-of-chatgpt-bias/)
+- **Image generation:**
+    - [DALL-E 2 Creates Incredible Images—and Biased Ones You Don’t See](https://www.wired.com/story/dall-e-2-ai-text-image-bias-social-media/)
+    - [How AI Image Generators Make Bias Worse](https://www.lis.ac.uk/stories/how-ai-image-generators-make-bias-worse)
+
+Most of us probably have seen countless of similar articles. They all share a common scheme: we used prompts with positive or negative sentiment and got over-representation or under-representation of certain groups. My criticism to all of them can be summarized as follows:
+
+"Mate, you literally asked to be drawn a picture of an average CEO/terrorist/doctor/whomever, which means that you asked a question: what are common visual features of an average CEO/terrorist/doctor. How is that a correct thing to ask? This is an ill-posed question".
+
+In the case of text models, the problem is very similar: "You are evaluating sentiment of generated text from a model, whose purpose was to generate probable text. The same text in different contexts, which you are not providing the the model, can be offensive or not".
+
+
+[^2]: https://www.sciencedirect.com/science/article/pii/S2666389923001307
+
+
+# What would be an unbiased oracle?
+
+To better understand that point, imagine an oracle. A perfect model, which is completely unbiased and speaks the truth when it is known. We can ask such model to draw pictures and generate text. 
+
+Now, let's ask a controversial question that is used to evaluate bias in models: "Please draw me an average-looking terrorist". Model generates an image and we can already imagine an absolutely understandable outrage from anyone that will look similarly to the result. Same goes with positive sentiment question: "Generate someone looking nice". Result will make everyone, who looks nothing like the result, slightly uncomfortable.
+
+So what is an issue here? Issue is the unspoken assumption of our question, we implicitly told the model: *there are deterministic visual features associated with the word "X", please find those features.*
+
+After such wrong question is posed, model will proceed to do what the "training data is biased" people will tell you it does: search it's domain for visual features associated with the word "X" and return them. But it is not the fact that the model found them that is the bias here. Nor is distribution of those features in our training data. It is our assumption that they exist that is. **Models will always output biased results answering ill-posed questions**. We can think of this as a special case of [spurious correlation](https://en.wikipedia.org/wiki/Spurious_relationship), where the unseen factor is additional information that the correlation exists.
+
+Second class of errors when interpreting output of generative models is forgetting 
+# References
