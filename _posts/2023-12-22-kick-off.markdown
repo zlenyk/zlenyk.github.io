@@ -2,6 +2,6 @@
 layout: post
 title:  "Kick off"
 date:   2023-12-22
-categories: jekyll update
+category: General
 ---
 Let's give those github pages a go. I intend to write down some thoughts about neural nets. I was also kind of thinking to start writing down reviews of musical. Those things don't really go together. But who cares.
