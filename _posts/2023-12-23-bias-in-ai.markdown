@@ -2,7 +2,7 @@
 layout: post
 title:  "AI is not biased, nor is training data. Your questions are"
 date:   2023-12-23
-categories: jekyll update
+category: AI esseys
 ---
 Whenever we have a new development in AI, we have a few, always the same, follow-up discussions. Here they are:
 - is it safe (will it kill us)[^1]?

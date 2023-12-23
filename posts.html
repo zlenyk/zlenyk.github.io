@@ -1,0 +1,20 @@
+---
+layout: page
+title: Posts
+---
+
+<div>
+  <h3>AI esseys</h3>
+  {% for post in site.posts %}
+  {% if post.categories contains "AI esseys" %}
+  <div class="post">
+    <h4>
+      <a href="{{ post.url }}">
+        {{ post.title }}
+      </a>
+    </h4>
+    <span class="post-date">{{ post.date | date_to_string }}</span>
+  </div>
+  {% endif %}
+  {% endfor %}
+</div>
