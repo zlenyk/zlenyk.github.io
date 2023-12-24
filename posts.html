@@ -17,4 +17,18 @@ title: Posts
   </div>
   {% endif %}
   {% endfor %}
+
+  <h3>West End</h3>
+  {% for post in site.posts %}
+  {% if post.categories contains "west-end" %}
+  <div class="post">
+    <h4>
+      <a href="{{ post.url }}">
+        {{ post.title }}
+      </a>
+    </h4>
+    <span class="post-date">{{ post.date | date_to_string }}</span>
+  </div>
+  {% endif %}
+  {% endfor %}
 </div>

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Operation Mincemeat review"
-date:   2023-12-23
+date:   2023-12-24
 categories: west-end
 ---
 **date:** 15.12.2023  
