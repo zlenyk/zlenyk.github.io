@@ -793,6 +793,37 @@ function startNewRound() {
 }
 
 /**
+ * Skip current category and get a new one with a new range
+ */
+function skipCategory() {
+    // Remove current category from used list if it exists
+    if (gameState.currentCategory) {
+        const currentIndex = gameState.categories.findIndex(
+            cat => cat.left === gameState.currentCategory.left && 
+                   cat.right === gameState.currentCategory.right
+        );
+        if (currentIndex !== -1) {
+            const usedIndex = gameState.usedCategoryIndices.indexOf(currentIndex);
+            if (usedIndex !== -1) {
+                gameState.usedCategoryIndices.splice(usedIndex, 1);
+            }
+        }
+    }
+    
+    // Get new category and range
+    gameState.currentCategory = selectRandomCategory();
+    updateCategoryDisplay(gameState.currentCategory);
+    
+    const randomCenter = generateRandomCenter();
+    calculateScoringRanges(randomCenter);
+    
+    // Redraw scoring ranges
+    setTimeout(() => {
+        drawScoringRanges('clue-giver-track', 'clue-giver-zones');
+    }, 10);
+}
+
+/**
  * Hide indicator and show guessing view
  */
 function hideIndicator() {
@@ -867,6 +898,7 @@ if (document.readyState === 'loading') {
 // Event listeners
 document.getElementById('start-game-btn').addEventListener('click', initGame);
 document.getElementById('hide-indicator-btn').addEventListener('click', hideIndicator);
+document.getElementById('skip-category-btn').addEventListener('click', skipCategory);
 document.getElementById('done-guessing-btn').addEventListener('click', showResults);
 document.getElementById('next-round-btn').addEventListener('click', nextTeam);
 document.getElementById('play-again-btn').addEventListener('click', () => {
