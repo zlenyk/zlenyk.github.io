@@ -25,4 +25,8 @@ Boring hobby, Interesting hobby
 Underpaid job, Overpaid job
 Hobby, Profession
 Easiest to learn, hardest to learn
+Easiest profession, Hardest profession
+Individual activity, Group activity
+Doing often, Doing rarely
+Unethical way to make money, Ethical way to make money
 
