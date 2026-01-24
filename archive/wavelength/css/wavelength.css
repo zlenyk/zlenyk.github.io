@@ -1,0 +1,462 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: #333;
+}
+
+.game-container {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 900px;
+    width: 100%;
+    padding: 40px;
+    position: relative;
+}
+
+.screen {
+    display: none;
+}
+
+.screen.active {
+    display: block;
+}
+
+h1 {
+    text-align: center;
+    color: #667eea;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+}
+
+h2 {
+    text-align: center;
+    color: #764ba2;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+/* Setup Screen */
+.setup-section {
+    margin-bottom: 25px;
+}
+
+.setup-section label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #555;
+}
+
+.setup-section input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.setup-section input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+/* Buttons */
+.btn {
+    padding: 14px 28px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 600;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Score Board */
+.score-board {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.score-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 25px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    min-width: 120px;
+}
+
+.team-name {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.team-score {
+    font-size: 28px;
+    font-weight: bold;
+    color: #667eea;
+}
+
+.current-team {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Game Views */
+.game-view {
+    animation: fadeIn 0.3s ease-in;
+}
+
+.game-view.hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Categories Display */
+.categories-display {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.category-left {
+    color: #667eea;
+    padding: 15px 25px;
+    background: #f0f4ff;
+    border-radius: 12px;
+    flex: 1;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.category-right {
+    color: #764ba2;
+    padding: 15px 25px;
+    background: #faf0ff;
+    border-radius: 12px;
+    flex: 1;
+    margin-left: 10px;
+    text-align: center;
+}
+
+/* Scale Container - Speedometer Style (Half Circle) */
+.scale-container {
+    margin: 40px 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+}
+
+.scale-track {
+    position: relative;
+    width: 400px;
+    height: 200px;
+    background: white;
+    border-radius: 200px 200px 0 0;
+    border: 4px solid #333;
+    border-bottom: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    overflow: visible;
+}
+
+/* Colored arc on the border */
+.scale-track::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    width: 400px;
+    height: 200px;
+    border-radius: 200px 200px 0 0;
+    border: 4px solid transparent;
+    border-bottom: none;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(to right, #667eea 0%, #764ba2 100%) border-box;
+    pointer-events: none;
+}
+
+.scale-labels {
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #666;
+    padding: 0 20px;
+    pointer-events: none;
+}
+
+/* Speedometer Triangle Indicator */
+.scale-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    /* Triangle: wider at bottom, pointy at top - longer to reach into ranges */
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 190px solid #ff6b6b;
+    transform-origin: bottom center;
+    transform: translateX(-50%) rotate(-90deg);
+    z-index: 15;
+    transition: transform 0.05s ease-out;
+    cursor: grab;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+    /* Make entire triangle draggable */
+    pointer-events: all;
+}
+
+/* Larger invisible hit area for easier grabbing */
+.scale-indicator::before {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 190px;
+    background: transparent;
+    pointer-events: all;
+    cursor: grab;
+}
+
+/* Circle at the base for better grip */
+.scale-indicator::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background: #ff6b6b;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    pointer-events: all;
+    z-index: 16;
+    cursor: grab;
+}
+
+.scale-indicator.guess-indicator {
+    border-bottom-color: #ff6b6b;
+    cursor: grab;
+}
+
+.scale-indicator.guess-indicator:active {
+    cursor: grabbing;
+}
+
+.scale-indicator.guess-indicator::after {
+    background: #ff6b6b;
+}
+
+.scale-indicator.target-indicator {
+    border-bottom-color: #51cf66;
+    cursor: default;
+}
+
+.scale-indicator.target-indicator::after {
+    background: #51cf66;
+}
+
+.scale-indicator.guess-result-indicator {
+    border-bottom-color: #ff6b6b;
+    cursor: default;
+}
+
+.scale-indicator.guess-result-indicator::after {
+    background: #ff6b6b;
+}
+
+/* Scoring Zones for Results View (Semicircle) */
+.scoring-zones {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 400px;
+    height: 200px;
+    pointer-events: none;
+    z-index: 5;
+    overflow: visible;
+}
+
+.instruction {
+    text-align: center;
+    color: #666;
+    font-size: 16px;
+    margin: 20px 0;
+}
+
+/* Results View */
+.results-container {
+    margin: 30px 0;
+}
+
+.result-scale {
+    margin-bottom: 30px;
+}
+
+.result-info {
+    text-align: center;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.distance {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.points-earned {
+    font-size: 32px;
+    font-weight: bold;
+    color: #51cf66;
+}
+
+/* Game Over Screen */
+.winner {
+    text-align: center;
+    margin: 30px 0;
+    padding: 30px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    color: white;
+}
+
+.winner h2 {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.winner p {
+    font-size: 20px;
+    opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .game-container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .categories-display {
+        font-size: 18px;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .category-left,
+    .category-right {
+        margin: 0;
+    }
+
+    .score-board {
+        flex-direction: column;
+    }
+
+    .score-item {
+        width: 100%;
+    }
+
+    .scale-container {
+        height: 200px;
+    }
+
+    .scale-track {
+        width: 300px;
+        height: 150px;
+        border-radius: 150px 150px 0 0;
+    }
+
+    .scale-track::before {
+        width: 300px;
+        height: 150px;
+        border-radius: 150px 150px 0 0;
+    }
+
+    .scale-indicator {
+        border-left-width: 8px;
+        border-right-width: 8px;
+        border-bottom-width: 120px;
+    }
+
+    .scoring-zones {
+        width: 300px;
+        height: 150px;
+    }
+
+    .scoring-zones svg {
+        width: 300px;
+        height: 150px;
+    }
+}
+

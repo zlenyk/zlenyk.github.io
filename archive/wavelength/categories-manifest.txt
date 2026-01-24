@@ -1,0 +1,7 @@
+# Category files manifest
+# List all category files to load (one per line)
+# Files are loaded in order, duplicates are automatically removed
+categories_basic.txt
+categories_funny.txt
+categories-nsfw.txt
+
