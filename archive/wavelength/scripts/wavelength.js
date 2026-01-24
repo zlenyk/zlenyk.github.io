@@ -46,6 +46,7 @@ let gameState = {
     numTeams: 2,
     pointsToWin: 10,
     noPointLimit: false,
+    noNSFW: false,
     teamNames: [],
     scores: [],
     currentTeam: 0,
@@ -284,6 +285,12 @@ async function loadCategories() {
         // Otherwise, try to discover files
         filesToTry = await discoverCategoryFiles(language);
         console.log(`No manifest found for ${language}, trying to discover files:`, filesToTry.slice(0, 5), '...');
+    }
+    
+    // Filter out NSFW files if noNSFW is enabled
+    if (gameState.noNSFW) {
+        filesToTry = filesToTry.filter(filename => !filename.endsWith('_nsfw.txt'));
+        console.log('NSFW categories filtered out');
     }
     
     // Load all files in parallel
@@ -719,6 +726,7 @@ function collectTeamNames() {
 function initGame() {
     gameState.numTeams = parseInt(document.getElementById('num-teams').value);
     gameState.noPointLimit = document.getElementById('no-point-limit').checked;
+    gameState.noNSFW = document.getElementById('no-nsfw').checked;
     gameState.pointsToWin = gameState.noPointLimit ? Infinity : parseInt(document.getElementById('points-to-win').value);
     gameState.language = elements.languageSelect.value || 'eng';
     

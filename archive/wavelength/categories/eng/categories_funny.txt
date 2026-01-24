@@ -15,3 +15,6 @@ Worst thing to put in a smoothie, Best thing to put in a smoothie
 Best temperature, Worst temperature
 Best color, Worst color
 Painful, pleasurable
+Worst birthday wish, Best birthday wish
+Best sound/noise, Worst sound/noise
+Useful in an emergency, Useless in an emergency

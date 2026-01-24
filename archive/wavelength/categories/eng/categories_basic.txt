@@ -24,3 +24,5 @@ Quick meal, elaborate meal
 Boring hobby, Interesting hobby
 Underpaid job, Overpaid job
 Hobby, Profession
+Easiest to learn, hardest to learn
+
