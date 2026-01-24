@@ -11,13 +11,42 @@
         <!-- Setup Screen -->
         <div id="setup-screen" class="screen active">
             <h1>Wavelength</h1>
-            <div class="setup-section">
-                <label for="num-teams">Number of Teams (1-5):</label>
-                <input type="number" id="num-teams" min="1" max="5" value="2">
-            </div>
-            <div class="setup-section">
-                <label for="points-to-win">Points to Win:</label>
-                <input type="number" id="points-to-win" min="1" value="10">
+            <div class="setup-grid">
+                <div class="setup-column">
+                    <div class="setup-section">
+                        <label for="num-teams">Number of Teams</label>
+                        <select id="num-teams" class="setup-input">
+                            <option value="1">1</option>
+                            <option value="2" selected>2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div id="team-names-container" class="team-names-container">
+                        <!-- Team name inputs will be dynamically added here -->
+                    </div>
+                </div>
+                <div class="setup-column">
+                    <div class="setup-section">
+                        <label for="points-to-win">Points to Win</label>
+                        <input type="number" id="points-to-win" class="setup-input" min="1" value="10">
+                    </div>
+                    <div class="setup-section">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="no-point-limit" class="checkbox-input">
+                            <span>No point limit</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="setup-column">
+                    <div class="setup-section">
+                        <label for="language-select">Language</label>
+                        <select id="language-select" class="setup-input language-select">
+                            <option value="">Loading languages...</option>
+                        </select>
+                    </div>
+                </div>
             </div>
             <button id="start-game-btn" class="btn btn-primary">Start Game</button>
         </div>

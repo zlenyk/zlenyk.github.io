@@ -27,9 +27,13 @@ const RANGE_COLORS = {
 const ROTATION_OFFSET = -90;
 const ROTATION_MULTIPLIER = 1.8;
 
-// Scoring range center bounds (to ensure ranges fit within 0-100%)
-const CENTER_MIN = 20;
-const CENTER_MAX = 80;
+// Scoring range center bounds
+const CENTER_MIN = 0;
+const CENTER_MAX = 100;
+
+// Edge bias parameter (0.0 = uniform distribution, 1.0 = maximum bias toward edges)
+// Higher values increase the chance of ranges near 0% or 100%
+const EDGE_BIAS = 0.1; // Range: 0.0 to 1.0
 
 // SVG drawing constants
 const BAND_THICKNESS_RATIO = 0.12; // 12% of radius for band visibility
@@ -41,12 +45,15 @@ const BAND_THICKNESS_RATIO = 0.12; // 12% of radius for band visibility
 let gameState = {
     numTeams: 2,
     pointsToWin: 10,
+    noPointLimit: false,
+    teamNames: [],
     scores: [],
     currentTeam: 0,
     currentCategory: null,
     guessPosition: 50,
     categories: [],
-    usedCategoryIndices: []
+    usedCategoryIndices: [],
+    language: 'eng' // Default language
 };
 
 let currentScoringRanges = {
@@ -80,7 +87,8 @@ const elements = {
     distanceText: document.getElementById('distance-text'),
     pointsText: document.getElementById('points-text'),
     winnerText: document.getElementById('winner-text'),
-    finalScoreText: document.getElementById('final-score-text')
+    finalScoreText: document.getElementById('final-score-text'),
+    languageSelect: document.getElementById('language-select')
 };
 
 // ============================================================================
@@ -141,18 +149,19 @@ function parseCategoriesFromText(text) {
 /**
  * Load categories from a single file
  */
-async function loadCategoriesFromFile(filename) {
+async function loadCategoriesFromFile(language, filename) {
+    const filepath = `categories/${language}/${filename}`;
     try {
-        const response = await fetch(filename);
+        const response = await fetch(filepath);
         if (!response.ok) {
             return [];
         }
         const text = await response.text();
         const categories = parseCategoriesFromText(text);
-        console.log(`Loaded ${categories.length} categories from ${filename}`);
+        console.log(`Loaded ${categories.length} categories from ${filepath}`);
         return categories;
     } catch (error) {
-        console.warn(`Failed to load ${filename}:`, error);
+        console.warn(`Failed to load ${filepath}:`, error);
         return [];
     }
 }
@@ -162,11 +171,24 @@ async function loadCategoriesFromFile(filename) {
  * Note: For better performance, create a categories-manifest.txt file
  * listing all your category files instead of relying on discovery
  */
-async function discoverCategoryFiles() {
+async function discoverCategoryFiles(language) {
     const files = [];
     
-    // Always try the main categories.txt file
-    files.push('categories.txt');
+    // Try common patterns with underscores: categories_basic.txt, categories_funny.txt, etc.
+    const commonNames = [
+        'categories_basic.txt',
+        'categories_funny.txt',
+        'categories_geography.txt',
+        'categories_interesting.txt',
+        'categories_nsfw.txt',
+        'categories_main.txt',
+        'categories_extra.txt',
+        'categories_additional.txt',
+        'categories_new.txt',
+        'categories_old.txt',
+        'categories_custom.txt'
+    ];
+    files.push(...commonNames);
     
     // Try numbered patterns: categories1.txt through categories20.txt
     for (let i = 1; i <= 20; i++) {
@@ -183,26 +205,16 @@ async function discoverCategoryFiles() {
         files.push(`categories-${i}.txt`);
     }
     
-    // Try common descriptive names
-    const commonNames = [
-        'categories_main.txt',
-        'categories_extra.txt',
-        'categories_additional.txt',
-        'categories_new.txt',
-        'categories_old.txt',
-        'categories_custom.txt'
-    ];
-    files.push(...commonNames);
-    
     return files;
 }
 
 /**
  * Load categories from manifest file (if it exists)
  */
-async function loadCategoryManifest() {
+async function loadCategoryManifest(language) {
     try {
-        const response = await fetch('categories-manifest.txt');
+        const filepath = `categories/${language}/categories-manifest.txt`;
+        const response = await fetch(filepath);
         if (!response.ok) {
             return null;
         }
@@ -216,32 +228,70 @@ async function loadCategoryManifest() {
     }
 }
 
+// ============================================================================
+// LANGUAGE CONFIGURATION
+// ============================================================================
+
+// Static list of supported languages
+const SUPPORTED_LANGUAGES = [
+    { code: 'eng', name: 'English' }
+    // Add more languages here as needed:
+    // { code: 'es', name: 'Español' },
+    // { code: 'fr', name: 'Français' },
+    // { code: 'de', name: 'Deutsch' },
+];
+
 /**
- * Load all categories from multiple files
+ * Populate language selector dropdown
+ */
+function populateLanguageSelector() {
+    const select = elements.languageSelect;
+    
+    select.innerHTML = '';
+    SUPPORTED_LANGUAGES.forEach(lang => {
+        const option = document.createElement('option');
+        option.value = lang.code;
+        option.textContent = lang.name;
+        if (lang.code === gameState.language) {
+            option.selected = true;
+        }
+        select.appendChild(option);
+    });
+    
+    // Update game state when language changes
+    select.addEventListener('change', (e) => {
+        gameState.language = e.target.value;
+        loadCategories();
+    });
+}
+
+/**
+ * Load all categories from multiple files for the selected language
  */
 async function loadCategories() {
+    const language = gameState.language || 'eng';
     gameState.categories = [];
     
     // First, try to load from manifest file
-    const manifestFiles = await loadCategoryManifest();
+    const manifestFiles = await loadCategoryManifest(language);
     let filesToTry = [];
     
     if (manifestFiles && manifestFiles.length > 0) {
         // Use manifest if available
         filesToTry = manifestFiles;
-        console.log('Using manifest file, loading:', filesToTry);
+        console.log(`Using manifest file for ${language}, loading:`, filesToTry);
     } else {
         // Otherwise, try to discover files
-        filesToTry = await discoverCategoryFiles();
-        console.log('No manifest found, trying to discover files:', filesToTry.slice(0, 5), '...');
+        filesToTry = await discoverCategoryFiles(language);
+        console.log(`No manifest found for ${language}, trying to discover files:`, filesToTry.slice(0, 5), '...');
     }
     
     // Load all files in parallel
-    const loadPromises = filesToTry.map(filename => loadCategoriesFromFile(filename));
+    const loadPromises = filesToTry.map(filename => loadCategoriesFromFile(language, filename));
     const results = await Promise.all(loadPromises);
     
     // Merge all categories
-    results.forEach((categories, index) => {
+    results.forEach((categories) => {
         if (categories.length > 0) {
             gameState.categories.push(...categories);
         }
@@ -259,7 +309,7 @@ async function loadCategories() {
     });
     
     if (gameState.categories.length === 0) {
-        console.warn('No categories loaded, using fallback');
+        console.warn(`No categories loaded for ${language}, using fallback`);
         // Fallback categories
         gameState.categories = [
             { left: "Wet", right: "Dry" },
@@ -268,7 +318,7 @@ async function loadCategories() {
         ];
     }
     
-    console.log(`Total categories loaded: ${gameState.categories.length}`);
+    console.log(`Total categories loaded for ${language}: ${gameState.categories.length}`);
 }
 
 /**
@@ -332,13 +382,11 @@ function calculateScoringRanges(centerPercent) {
     ].filter(range => range !== null);
     
     // Yellow ranges (3 points) - on both sides of red
-    const yellowRanges = [];
-    if (redRanges[0]) {
-        yellowRanges.push(createRange(redRanges[0].min - RANGE_SIZES.yellow, redRanges[0].min, RANGE_POINTS.yellow));
-    }
-    if (redRanges[1]) {
-        yellowRanges.push(createRange(redRanges[1].max, redRanges[1].max + RANGE_SIZES.yellow, RANGE_POINTS.yellow));
-    }
+    // Calculate based on blue boundaries, not red ranges, so yellow can exist even if red is null
+    const yellowRanges = [
+        createRange(blueMin - RANGE_SIZES.red - RANGE_SIZES.yellow, blueMin - RANGE_SIZES.red, RANGE_POINTS.yellow),
+        createRange(blueMax + RANGE_SIZES.red, blueMax + RANGE_SIZES.red + RANGE_SIZES.yellow, RANGE_POINTS.yellow)
+    ].filter(range => range !== null);
     
     currentScoringRanges = {
         blue: { min: blueMin, max: blueMax, points: RANGE_POINTS.blue },
@@ -495,6 +543,13 @@ function drawScoringRanges(trackId, zonesId) {
 // ============================================================================
 
 /**
+ * Get team name or default to "Team X"
+ */
+function getTeamName(index) {
+    return gameState.teamNames[index] || `Team ${index + 1}`;
+}
+
+/**
  * Update score board display
  */
 function updateScoreBoard() {
@@ -503,7 +558,7 @@ function updateScoreBoard() {
         const scoreItem = document.createElement('div');
         scoreItem.className = 'score-item';
         scoreItem.innerHTML = `
-            <span class="team-name">Team ${index + 1}</span>
+            <span class="team-name">${getTeamName(index)}</span>
             <span class="team-score">${score}</span>
         `;
         elements.scoreBoard.appendChild(scoreItem);
@@ -625,18 +680,88 @@ function setupDragging() {
 // ============================================================================
 
 /**
+ * Update team name inputs when number of teams changes
+ */
+function updateTeamNameInputs() {
+    const numTeams = parseInt(document.getElementById('num-teams').value);
+    const container = document.getElementById('team-names-container');
+    container.innerHTML = '';
+    
+    for (let i = 0; i < numTeams; i++) {
+        const inputGroup = document.createElement('div');
+        inputGroup.className = 'team-name-input-group';
+        inputGroup.innerHTML = `
+            <label for="team-name-${i}">Team ${i + 1} Name</label>
+            <input type="text" id="team-name-${i}" class="setup-input" 
+                   placeholder="Team ${i + 1}" 
+                   value="${gameState.teamNames[i] || ''}">
+        `;
+        container.appendChild(inputGroup);
+    }
+}
+
+/**
+ * Collect team names from inputs
+ */
+function collectTeamNames() {
+    const numTeams = parseInt(document.getElementById('num-teams').value);
+    gameState.teamNames = [];
+    for (let i = 0; i < numTeams; i++) {
+        const input = document.getElementById(`team-name-${i}`);
+        const name = input ? input.value.trim() : '';
+        gameState.teamNames.push(name || `Team ${i + 1}`);
+    }
+}
+
+/**
  * Initialize game
  */
 function initGame() {
     gameState.numTeams = parseInt(document.getElementById('num-teams').value);
-    gameState.pointsToWin = parseInt(document.getElementById('points-to-win').value);
+    gameState.noPointLimit = document.getElementById('no-point-limit').checked;
+    gameState.pointsToWin = gameState.noPointLimit ? Infinity : parseInt(document.getElementById('points-to-win').value);
+    gameState.language = elements.languageSelect.value || 'eng';
+    
+    collectTeamNames();
+    
     gameState.scores = new Array(gameState.numTeams).fill(0);
     gameState.currentTeam = 0;
     gameState.usedCategoryIndices = [];
     
-    updateScoreBoard();
-    startNewRound();
-    showScreen('game-screen');
+    // Reload categories with selected language
+    loadCategories().then(() => {
+        updateScoreBoard();
+        startNewRound();
+        showScreen('game-screen');
+    });
+}
+
+/**
+ * Generate a random center position with edge bias
+ * Higher EDGE_BIAS values favor positions near 0% or 100%
+ */
+function generateRandomCenter() {
+    if (EDGE_BIAS === 0) {
+        // Uniform distribution across full range
+        return CENTER_MIN + Math.random() * (CENTER_MAX - CENTER_MIN);
+    }
+    
+    // Use a power function to bias toward edges
+    // When EDGE_BIAS is high, we're more likely to get values near 0 or 100
+    const normalizedRandom = Math.pow(Math.random(), 1 / (1 + EDGE_BIAS));
+    
+    // Map to either lower half (0-50%) or upper half (50-100%) with equal probability
+    const useLowerHalf = Math.random() < 0.5;
+    
+    if (useLowerHalf) {
+        // Lower half: map from 50% toward 0%
+        // normalizedRandom of 0 = 50%, normalizedRandom of 1 = 0%
+        return 50 * (1 - normalizedRandom);
+    } else {
+        // Upper half: map from 50% toward 100%
+        // normalizedRandom of 0 = 50%, normalizedRandom of 1 = 100%
+        return 50 + 50 * normalizedRandom;
+    }
 }
 
 /**
@@ -646,11 +771,11 @@ function startNewRound() {
     gameState.currentCategory = selectRandomCategory();
     updateCategoryDisplay(gameState.currentCategory);
     
-    const randomCenter = CENTER_MIN + Math.random() * (CENTER_MAX - CENTER_MIN);
+    const randomCenter = generateRandomCenter();
     calculateScoringRanges(randomCenter);
     
     gameState.guessPosition = 50;
-    elements.currentTeamText.textContent = `Team ${gameState.currentTeam + 1}'s Turn`;
+    elements.currentTeamText.textContent = `${getTeamName(gameState.currentTeam)}'s Turn`;
     
     showView('clue-giver');
     
@@ -696,7 +821,8 @@ function showResults() {
     
     updateScoreBoard();
     
-    if (gameState.scores[gameState.currentTeam] >= gameState.pointsToWin) {
+    // Check for game over (only if point limit is enabled)
+    if (!gameState.noPointLimit && gameState.scores[gameState.currentTeam] >= gameState.pointsToWin) {
         setTimeout(() => showGameOver(), 2000);
     }
 }
@@ -714,7 +840,7 @@ function nextTeam() {
  */
 function showGameOver() {
     const winningTeam = gameState.scores.indexOf(Math.max(...gameState.scores));
-    elements.winnerText.textContent = `Team ${winningTeam + 1} Wins!`;
+    elements.winnerText.textContent = `${getTeamName(winningTeam)} Wins!`;
     elements.finalScoreText.textContent = `Final Score: ${gameState.scores[winningTeam]} points`;
     showScreen('game-over-screen');
 }
@@ -739,7 +865,23 @@ document.getElementById('play-again-btn').addEventListener('click', () => {
     showScreen('setup-screen');
 });
 
-// Load categories on page load
+// Update team name inputs when number of teams changes
+document.getElementById('num-teams').addEventListener('change', updateTeamNameInputs);
+
+// Disable/enable points input based on no-point-limit checkbox
+document.getElementById('no-point-limit').addEventListener('change', (e) => {
+    const pointsInput = document.getElementById('points-to-win');
+    pointsInput.disabled = e.target.checked;
+    if (e.target.checked) {
+        pointsInput.style.opacity = '0.5';
+    } else {
+        pointsInput.style.opacity = '1';
+    }
+});
+
+// Initialize on page load
+populateLanguageSelector();
+updateTeamNameInputs();
 loadCategories().then(() => {
     console.log('Categories loaded:', gameState.categories.length);
 });

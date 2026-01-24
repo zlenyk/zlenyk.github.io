@@ -48,8 +48,20 @@ h2 {
 }
 
 /* Setup Screen */
+.setup-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.setup-column {
+    display: flex;
+    flex-direction: column;
+}
+
 .setup-section {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .setup-section label {
@@ -57,18 +69,73 @@ h2 {
     margin-bottom: 8px;
     font-weight: 600;
     color: #555;
+    font-size: 14px;
 }
 
-.setup-section input {
+.setup-input {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     border: 2px solid #e0e0e0;
     border-radius: 8px;
     font-size: 16px;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, opacity 0.3s;
+    box-sizing: border-box;
 }
 
-.setup-section input:focus {
+.setup-input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.setup-input:disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 600;
+    color: #555;
+    font-size: 14px;
+}
+
+.checkbox-input {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    cursor: pointer;
+    accent-color: #667eea;
+}
+
+.team-names-container {
+    margin-top: 10px;
+}
+
+.team-name-input-group {
+    margin-bottom: 15px;
+}
+
+.team-name-input-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #666;
+    font-size: 13px;
+}
+
+.team-name-input-group input {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+.team-name-input-group input:focus {
     outline: none;
     border-color: #667eea;
 }
@@ -406,6 +473,11 @@ h2 {
 
     h2 {
         font-size: 1.5em;
+    }
+
+    .setup-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
 
     .categories-display {
