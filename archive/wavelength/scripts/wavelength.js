@@ -150,7 +150,7 @@ function parseCategoriesFromText(text) {
  * Load categories from a single file
  */
 async function loadCategoriesFromFile(language, filename) {
-    const filepath = `categories/${language}/${filename}`;
+    const filepath = `archive/wavelength/categories/${language}/${filename}`;
     try {
         const response = await fetch(filepath);
         if (!response.ok) {
@@ -213,7 +213,7 @@ async function discoverCategoryFiles(language) {
  */
 async function loadCategoryManifest(language) {
     try {
-        const filepath = `categories/${language}/categories-manifest.txt`;
+        const filepath = `archive/wavelength/categories/${language}/categories-manifest.txt`;
         const response = await fetch(filepath);
         if (!response.ok) {
             return null;

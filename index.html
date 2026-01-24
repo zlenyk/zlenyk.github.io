@@ -1,37 +1,168 @@
----
-layout: default
-title: Home
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wavelength Game</title>
+    <link rel="stylesheet" href="archive/wavelength/css/wavelength.css">
+    <style>
+        /* Hidden blog link - very subtle, top right corner */
+        .blog-link {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+            z-index: 1000;
+            padding: 5px;
+            transition: color 0.3s;
+        }
+        .blog-link:hover {
+            color: rgba(255, 255, 255, 0.3);
+        }
+        /* Make it more visible on hover but still subtle */
+        .blog-link:active {
+            color: rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hidden blog link -->
+    <a href="blog.html" class="blog-link" title="Blog">●</a>
+    
+    <div class="game-container">
+        <!-- Setup Screen -->
+        <div id="setup-screen" class="screen active">
+            <h1>Wavelength</h1>
+            <div class="setup-grid">
+                <div class="setup-column">
+                    <div class="setup-section">
+                        <label for="num-teams">Number of Teams</label>
+                        <select id="num-teams" class="setup-input">
+                            <option value="1">1</option>
+                            <option value="2" selected>2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div id="team-names-container" class="team-names-container">
+                        <!-- Team name inputs will be dynamically added here -->
+                    </div>
+                </div>
+                <div class="setup-column">
+                    <div class="setup-section">
+                        <label for="points-to-win">Points to Win</label>
+                        <input type="number" id="points-to-win" class="setup-input" min="1" value="10">
+                    </div>
+                    <div class="setup-section">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="no-point-limit" class="checkbox-input">
+                            <span>No point limit</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="setup-column">
+                    <div class="setup-section">
+                        <label for="language-select">Language</label>
+                        <select id="language-select" class="setup-input language-select">
+                            <option value="">Loading languages...</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <button id="start-game-btn" class="btn btn-primary">Start Game</button>
+        </div>
 
-<div class="posts">
-  {% for post in paginator.posts %}
-  <div class="post">
-    <h1 class="post-title">
-      <a href="{{ post.url }}">
-        {{ post.title }}
-      </a>
-    </h1>
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <!-- Score Display -->
+            <div class="score-board" id="score-board"></div>
 
-    <span class="post-date">{{ post.date | date_to_string }}</span>
+            <!-- Current Team Display -->
+            <div class="current-team">
+                <h2 id="current-team-text">Team 1's Turn</h2>
+            </div>
 
-    {{ post.content }}
-  </div>
-  {% endfor %}
-</div>
+            <!-- Clue Giver View (when indicator is visible) -->
+            <div id="clue-giver-view" class="game-view">
+                <div class="categories-display">
+                    <span class="category-left" id="category-left"></span>
+                    <span class="category-right" id="category-right"></span>
+                </div>
+                <div class="scale-container">
+                    <div class="scale-track" id="clue-giver-track">
+                        <div class="scoring-zones" id="clue-giver-zones"></div>
+                    </div>
+                    <div class="scale-labels">
+                        <span>0%</span>
+                        <span>100%</span>
+                    </div>
+                </div>
+                <p class="instruction">Think of a word that describes which colored range your clue should target.</p>
+                <button id="hide-indicator-btn" class="btn btn-primary">Hide Ranges</button>
+            </div>
 
-<div class="pagination">
-  {% if paginator.next_page %}
-    <a class="pagination-item older" href="{{ site.baseurl }}page{{paginator.next_page}}">Older</a>
-  {% else %}
-    <span class="pagination-item older">Older</span>
-  {% endif %}
-  {% if paginator.previous_page %}
-    {% if paginator.page == 2 %}
-      <a class="pagination-item newer" href="{{ site.baseurl }}">Newer</a>
-    {% else %}
-      <a class="pagination-item newer" href="{{ site.baseurl }}page{{paginator.previous_page}}">Newer</a>
-    {% endif %}
-  {% else %}
-    <span class="pagination-item newer">Newer</span>
-  {% endif %}
-</div>
+            <!-- Team Guessing View (when indicator is hidden) -->
+            <div id="guessing-view" class="game-view hidden">
+                <div class="categories-display">
+                    <span class="category-left" id="category-left-guess"></span>
+                    <span class="category-right" id="category-right-guess"></span>
+                </div>
+                <div class="scale-container">
+                    <div class="scale-track" id="guess-track">
+                        <div class="scoring-zones" id="guess-zones"></div>
+                        <div class="scale-indicator guess-indicator" id="guess-indicator"></div>
+                    </div>
+                    <div class="scale-labels">
+                        <span>0%</span>
+                        <span>100%</span>
+                    </div>
+                </div>
+                <p class="instruction">Drag the indicator to your guess, then click "Done Guessing"</p>
+                <button id="done-guessing-btn" class="btn btn-primary">Done Guessing</button>
+            </div>
+
+            <!-- Results View -->
+            <div id="results-view" class="game-view hidden">
+                <div class="categories-display">
+                    <span class="category-left" id="category-left-result"></span>
+                    <span class="category-right" id="category-right-result"></span>
+                </div>
+                <div class="results-container">
+                    <div class="result-scale">
+                        <div class="scale-container">
+                            <div class="scale-track" id="result-track">
+                                <div class="scoring-zones" id="scoring-zones"></div>
+                                <div class="scale-indicator guess-result-indicator" id="result-guess-indicator"></div>
+                            </div>
+                            <div class="scale-labels">
+                                <span>0%</span>
+                                <span>100%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="result-info">
+                        <p class="distance" id="distance-text">Distance: 0%</p>
+                        <p class="points-earned" id="points-text">Points Earned: 0</p>
+                    </div>
+                </div>
+                <button id="next-round-btn" class="btn btn-primary">Next Round</button>
+            </div>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="game-over-screen" class="screen">
+            <h1>Game Over!</h1>
+            <div class="winner">
+                <h2 id="winner-text">Team 1 Wins!</h2>
+                <p id="final-score-text">Final Score: 0 points</p>
+            </div>
+            <button id="play-again-btn" class="btn btn-primary">Play Again</button>
+        </div>
+    </div>
+
+    <script src="archive/wavelength/scripts/wavelength.js"></script>
+</body>
+</html>
