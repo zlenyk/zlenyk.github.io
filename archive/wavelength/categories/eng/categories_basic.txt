@@ -20,7 +20,7 @@ Laughing movie, Crying movie
 Easiest animal to fight, Hardest animal to fight
 Worst dessert, Best dessert
 Villain name, Superhero name
-Quick meal, elaborate meal
+Quick meal, Elaborate meal
 Boring hobby, Interesting hobby
 Underpaid job, Overpaid job
 Hobby, Profession
