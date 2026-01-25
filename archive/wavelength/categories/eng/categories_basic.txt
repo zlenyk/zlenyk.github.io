@@ -1,30 +1,24 @@
 Dry, Wet
-Dog name, Cat name
 Fact, Opinion
 Square, Round
-Snack, Meal
 Sad song, Happy song
 Funny movie, Serious movie
 Conspiracy theory, Scientific fact
-Luxurious destination, Cheap destination
 Worse chore, Best chore
 Dignified name, Trashy name
 Least cute animal, Most cute animal
 Most dangerous sport, Safest sport
-Interesting school subject, Boring school subject
 Necessary habit, Unnecessary habit
-Useful Tech, Useless Tech
 Worst thing to happen during the day, Best thing to happen during the day
 Least cool pet, Most cool pet
 Laughing movie, Crying movie
 Easiest animal to fight, Hardest animal to fight
-Worst dessert, Best dessert
 Villain name, Superhero name
-Quick meal, Elaborate meal
+Useful Tech, Useless Tech
 Boring hobby, Interesting hobby
 Underpaid job, Overpaid job
 Hobby, Profession
-Easiest to learn, hardest to learn
+Easiest to learn, Hardest to learn
 Easiest profession, Hardest profession
 Individual activity, Group activity
 Doing often, Doing rarely

@@ -1,0 +1,7 @@
+Dog name, Cat name
+Snack, Meal
+Luxurious destination, Cheap destination
+Interesting school subject, Boring school subject
+Useful Tech, Useless Tech
+Worst dessert, Best dessert
+Quick meal, Elaborate meal
