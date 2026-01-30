@@ -5,3 +5,11 @@ Interesting school subject, Boring school subject
 Useful Tech, Useless Tech
 Worst dessert, Best dessert
 Quick meal, Elaborate meal
+Square, Round
+Most dangerous sport, Safest sport
+Worst thing to happen during the day, Best thing to happen during the day
+Laughing movie, Crying movie
+Doing often, Doing rarely
+Weakest celebrity, Strongest celebrity
+Worst animal to turn into, Best animal to turn into
+Worst thing to put in a smoothie, Best thing to put in a smoothie

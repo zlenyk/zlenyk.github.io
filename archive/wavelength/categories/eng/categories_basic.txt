@@ -1,17 +1,13 @@
 Dry, Wet
 Fact, Opinion
-Square, Round
 Sad song, Happy song
 Funny movie, Serious movie
 Conspiracy theory, Scientific fact
-Worse chore, Best chore
+Worst chore, Best chore
 Dignified name, Trashy name
 Least cute animal, Most cute animal
-Most dangerous sport, Safest sport
 Necessary habit, Unnecessary habit
-Worst thing to happen during the day, Best thing to happen during the day
 Least cool pet, Most cool pet
-Laughing movie, Crying movie
 Easiest animal to fight, Hardest animal to fight
 Villain name, Superhero name
 Useful Tech, Useless Tech
@@ -21,6 +17,5 @@ Hobby, Profession
 Easiest to learn, Hardest to learn
 Easiest profession, Hardest profession
 Individual activity, Group activity
-Doing often, Doing rarely
 Unethical way to make money, Ethical way to make money
 
